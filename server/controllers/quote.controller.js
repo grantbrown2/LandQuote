@@ -41,3 +41,32 @@ try {
     res.status(500).send('An error occurred while submitting the quote.');
   }
 }
+
+
+
+
+// MY WAY 
+
+
+
+
+const Quote = require('../models/quote.model');
+
+
+module.exports.createQuote = (req, res) => {
+    const {datetime, address, name, email, number, notes} = req.body;
+    Quote.create(req.body)
+        .then(quote => {
+            const newQuote = {
+                datetime,
+                address,
+                name,
+                email,
+                number,
+                notes
+            };
+            quote.quotes.push(newQuote);
+            return quote.save();
+        })
+        .catch(err => res.json(err));
+};
