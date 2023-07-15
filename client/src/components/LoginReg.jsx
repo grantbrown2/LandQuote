@@ -3,10 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import axios from 'axios';
 import '../styles/LoginReg.css'
-import logo from '../styles/logo.png';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGithubSquare } from '@fortawesome/free-brands-svg-icons';
-
 const LoginReg = () => {
 
     const [username, setUsername] = useState("");
@@ -80,7 +76,7 @@ const LoginReg = () => {
     return (
         <div className='loginreg-container'>
             <div className='logo-container'>
-                <img className='logo' src={logo} alt='The Artchive Logo' />
+
             </div>
             <div className="slider-box">
                 <input id='slider' type='checkbox' checked={formToggle} onChange={handleFormToggle}/>
@@ -89,16 +85,7 @@ const LoginReg = () => {
                 <span className="slider"></span>
             </div>
             <ul className="social-icon2">
-                <li className="social-icon__item2">
-                    <a className="social-icon__link2" href="https://github.com/grantbrown2">
-                        <FontAwesomeIcon icon={faGithubSquare} />
-                    </a>
-                </li>
-                <li className="social-icon__item2">
-                    <a className="social-icon__link2" href="https://github.com/shu-william">
-                        <FontAwesomeIcon icon={faGithubSquare} />
-                    </a>
-                </li>
+
             </ul>
             {formToggle ? (
                 <>

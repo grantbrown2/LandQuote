@@ -1,0 +1,200 @@
+body {
+    background: url("./background.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+@media (min-width: 768px) {
+    body {
+        background-image: url("./background2.png");
+    }
+}
+@media (min-width: 1200px) {
+    body {
+        background-image: url("./background.png");
+    }
+}
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+    caret-color: transparent;
+}
+.loginreg-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 750px;
+    background-color: #fff;
+    box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.3);
+    display: inline-block;
+    align-items: center;
+    text-align: center;
+}
+
+.text-danger {
+    color: #ff0000;
+    font-size: 10px;
+    margin: 2px 0;
+}
+
+
+
+
+
+
+
+.input-field:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 30px white inset; /* Set a large box shadow to override the default background color */
+    -webkit-text-fill-color: #333; /* Set the text color */
+    transition: background-color 5000s ease-in-out 0s; /* Prevent the background color transition */
+}
+
+.input-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.input-field {
+    border: 1px solid lightgrey;
+    border-radius: 6px;
+    padding: 10px;
+    min-width: 250px;
+    margin-bottom: 20px;
+    /* Adjust the width to your preference */
+}
+
+.input-label {
+    position: absolute;
+    top: 50%;
+    left: 125px;
+    padding: 0 5px;
+    transform: translateY(135%);
+    pointer-events: none;
+    transition: transform 0.3s ease-in-out;
+    caret-color: transparent;
+}
+
+.input-field:hover+.input-label,
+.input-field:focus+.input-label, 
+.input-field.has-content+.input-label {
+    transform: translateY(20%);
+    background-color: #fff;
+    /* Adjust the translateY value to slide the label up */
+}
+
+.input-field:focus+.input-label,
+.input-field:not(:placeholder-shown)+.input-label,
+.input-field:valid+.input-label,
+.input-field.has-content+.input-label {
+    top: -12px;
+    /* Adjust the top position when the input is focused or has content */
+    font-size: 12px;
+    /* Optional: Reduce font size when the label moves up */
+}
+.submit-button {
+    width: 225px;
+    height: 35px;
+    background: linear-gradient(to right, #1164ff, #70a2ff);
+    border-radius: 30px;
+    transition: transform 0.3s ease-in-out;
+    /* Add a transition for the transform property */
+}
+
+.submit-button:hover {
+    transform: scale(.90);
+    /* Increase the size of the button on hover */
+}
+
+.submit-button:active {
+    transform: scale(0.95);
+    /* Decrease the size of the button when clicked */
+}
+
+
+
+
+
+.slider-box {
+    width: 220px;
+    margin: 35px auto;
+    padding: 10px;
+    position: relative;
+    box-shadow: 0 0 20px 9px #3f3f3f1f;
+    border-radius: 30px;
+    cursor: pointer;
+    caret-color: transparent;
+}
+.login-label,
+.register-label {
+    padding: 10px 30px;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    outline: none;
+    position: relative;
+    z-index: 2;
+    color: #333;
+}
+#slider {
+    display: none;
+}
+.slider {
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: 130px;
+    height: 100%;
+    background: linear-gradient(to right, #1164ff, #70a2ff);
+    border-radius: 30px;
+    transition: .5s;
+    transform: translateX(110px);
+}
+#slider:checked ~ .slider {
+    transform: translateX(0);
+}
+
+
+
+
+
+
+
+.social-icon2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 25px 0;
+}
+.social-icon__link2 {
+    font-size: 2rem;
+    color: #350f0f;
+    margin: 0 5px;
+    transition: 0.5s;
+}
+.social-icon__link2:hover {
+    transform: translateY(-10px);
+    position: relative;
+}
+.social-icon__link2:hover::before {
+    content: 'GitHub Profile';
+    position: absolute;
+    top: -25%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 5px;
+    font-size: 10px;
+    white-space: nowrap;
+}
+.social-icon__item2 {
+    list-style: none;
+}
