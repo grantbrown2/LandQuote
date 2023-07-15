@@ -1,4 +1,5 @@
 const UserController = require('../controllers/user.controller');
+const QuoteController = require('../controllers/quote.controller');
 const { authenticate, getIdFromCookie } = require('../config/jwt.config');
 const { get } = require('mongoose');
 
