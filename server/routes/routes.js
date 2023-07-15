@@ -20,5 +20,5 @@ module.exports = (app) => {
     app.patch('/api/users/update', authenticate, getIdFromCookie, UserController.updateUser);
     app.delete('/api/users/delete', authenticate, getIdFromCookie, UserController.deleteUser);
     
-    app.post('/api/quote/submit', QuoteController.submit);
+    app.post('/api/quote/submit', QuoteController.createQuote);
 }
