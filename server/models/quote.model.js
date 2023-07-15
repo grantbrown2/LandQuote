@@ -1,3 +1,5 @@
+const mongoose = require('mongoose');
+
 const quoteSchema = new mongoose.Schema({
     datetime: String,
     address: String,
@@ -7,5 +9,4 @@ const quoteSchema = new mongoose.Schema({
     notes: String,
     pictures: [{ filename: String, path: String }],
 });
-    
 module.exports = mongoose.model('Quote', quoteSchema);

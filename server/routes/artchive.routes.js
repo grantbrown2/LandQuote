@@ -19,4 +19,6 @@ module.exports = (app) => {
     app.get('/api/users/:username', authenticate, getIdFromCookie, UserController.findUserByName);
     app.patch('/api/users/update', authenticate, getIdFromCookie, UserController.updateUser);
     app.delete('/api/users/delete', authenticate, getIdFromCookie, UserController.deleteUser);
+    
+    app.post('/api/quote/submit', QuoteController.submit);
 }
