@@ -5,10 +5,14 @@ body {
     margin: 0;
     padding: 0;
     overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
 @media (min-width: 768px) {
     body {
-        background-image: url("./background2.png");
+        background-image: url("./background-verticle.jpg");
     }
 }
 @media (min-width: 1200px) {
@@ -16,27 +20,57 @@ body {
         background-image: url("./background.png");
     }
 }
-
-.logo-container {
+.loginreg-container {
+    position: relative;
+    width: 500px;
+    height: 500px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 20px 0;
-    caret-color: transparent;
 }
-.loginreg-container {
+.loginreg-container i {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 500px;
-    height: 750px;
-    background-color: #fff;
-    box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.3);
-    display: inline-block;
-    align-items: center;
-    text-align: center;
+    inset: 0;
+    border: 2px solid #fff;
+    transition: 0.5s;
+    caret-color: transparent;
+    z-index: -1;
 }
+.loginreg-container i:nth-child(1) {
+    border-radius: 38% 62% 63% 37% / 41% 44% 56% 59%;
+    animation: animate 6s linear infinite;
+}
+.loginreg-container i:nth-child(2) {
+    border-radius: 41% 44% 56% 59% / 38% 62% 63% 37%;
+    animation: animate 4s linear infinite;
+}
+.loginreg-container i:nth-child(3) {
+    border-radius: 41% 44% 56% 59% / 38% 62% 63% 37%;
+    animation: animate2 10s linear infinite;
+}
+.loginreg-container:hover i {
+    border: 6px solid var(--clr);
+    filter: drop-shadow(0 0 20px var (--clr));
+}
+@keyframes animate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+@keyframes animate2 {
+    0% {
+        transform: rotate(360deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+
 
 .text-danger {
     color: #ff0000;
@@ -100,32 +134,18 @@ body {
     font-size: 12px;
     /* Optional: Reduce font size when the label moves up */
 }
+
+
+
 .submit-button {
-    width: 225px;
-    height: 35px;
-    background: linear-gradient(to right, #1164ff, #70a2ff);
-    border-radius: 30px;
-    transition: transform 0.3s ease-in-out;
-    /* Add a transition for the transform property */
+    margin: 25px auto;
+    z-index: 2;
 }
-
-.submit-button:hover {
-    transform: scale(.90);
-    /* Increase the size of the button on hover */
-}
-
-.submit-button:active {
-    transform: scale(0.95);
-    /* Decrease the size of the button when clicked */
-}
-
-
-
 
 
 .slider-box {
     width: 220px;
-    margin: 35px auto;
+    margin: 0 auto;
     padding: 10px;
     position: relative;
     box-shadow: 0 0 20px 9px #3f3f3f1f;
@@ -198,3 +218,8 @@ body {
 .social-icon__item2 {
     list-style: none;
 }
+
+
+
+
+

@@ -75,6 +75,9 @@ const LoginReg = () => {
 
     return (
         <div className='loginreg-container'>
+        <i style={{ "--clr": "black" }}></i>
+        <i style={{ "--clr": "black" }}></i>
+        <i style={{ "--clr": "black" }}></i>
             <div className='logo-container'>
 
             </div>
@@ -100,7 +103,11 @@ const LoginReg = () => {
                                 <input type="password" className="input-field" id="password" name="password" onChange={e => {setPassword(e.target.value); handleInputChange(e); }} />
                                 <label htmlFor="password" className='input-label'>Password:</label>
                             </div>
-                            <button type="submit" className="submit-button">Login</button>
+                            {/* <div className="input-container">
+                                <input type="tel" className="input-field" id="number" name="number" />
+                                <label htmlFor="number" className='input-label'>Phone Number:</label>
+                            </div> */}
+                            <button type="submit" className="btn">Login</button>
                         </form>
                     </div>
                 </>
