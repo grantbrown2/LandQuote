@@ -17,3 +17,9 @@ module.exports.createQuote = (req, res) => {
         })
         .catch(err => res.json(err));
 };
+
+module.exports.getAllQuotes = (req, res) => {
+    Quote.find({})
+        .then(quotes => res.json(quotes))
+        .catch(err => res.json(err));
+};
