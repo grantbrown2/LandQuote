@@ -23,3 +23,16 @@ module.exports.getAllQuotes = (req, res) => {
         .then(quotes => res.json(quotes))
         .catch(err => res.json(err));
 };
+
+module.exports.deleteQuoteById = (req, res) => {
+    const id = req.params.id;
+
+    Quote.findByIdAndRemove(id)
+        .then(quote => {
+            if (!quote) {
+                return res.status(404).json({message: "Quote not found"});
+            }
+            return res.status(200).json({message: "Quote successfully deleted"});
+        })
+        .catch(err => res.status(500).json(err));
+};
