@@ -3,13 +3,12 @@ import axios from 'axios'
 import '../styles/BottomBar.css'
 import { Link, useNavigate } from 'react-router-dom'
 
-const BottomBar = () => {
+const BottomBar = ({toggleAbout, toggleQuote, toggleContact}) => {
     const navigate = useNavigate();
     const logoutUser = (e) => {
         e.preventDefault()
         axios.post("http://localhost:8000/api/users/logout", {}, { withCredentials: true })
             .then(res => {
-                console.log(res);
                 navigate("/");
             })
             .catch(err => console.log(err))
@@ -18,16 +17,16 @@ const BottomBar = () => {
     return (
         <footer className="footer">
             <div className="menu">
-                <a className="menu__link">
+                <Link className="menu__link" onClick={toggleQuote}>
                     Home
-                </a>
-                <a className="menu__link" href="/">
+                </Link>
+                <Link className="menu__link" onClick={toggleAbout}>
                     About
-                </a>
-                <a className="menu__link" href="/">
+                </Link>
+                <Link className="menu__link" onClick={toggleContact}>
                     Contact
-                </a>
-                <Link onClick={logoutUser} className="menu__link">
+                </Link>
+                <Link className="menu__link" onClick={logoutUser}>
                     Logout
                 </Link>
             </div>
