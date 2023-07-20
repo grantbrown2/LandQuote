@@ -1,21 +1,27 @@
 const Quote = require('../models/quote.model');
 
-
 module.exports.createQuote = (req, res) => {
+    console.log("Request body:", req.body); // Debug line
+    console.log("Request files:", req.files); // Debug line
+
     const {address, name, email, number, notes} = req.body;
-    Quote.create(req.body)
+    const quoteImages = req.files ? req.files.map(file => file.path) : []; // array of paths of the uploaded files
+    Quote.create({
+        address,
+        name,
+        email,
+        number,
+        notes,
+        quoteImages // adding the image paths to your document
+    })
         .then(quote => {
-            const newQuote = {
-                address,
-                name,
-                email,
-                number,
-                notes
-            };
-            quote.quotes.push(newQuote);
-            return quote.save();
+            console.log("Created quote:", quote); // Debug line
+            res.json(quote)
         })
-        .catch(err => res.json(err));
+        .catch(err => {
+            console.log("Error while creating quote:", err); // Debug line
+            res.json(err)
+        });
 };
 
 module.exports.getAllQuotes = (req, res) => {
