@@ -12,6 +12,8 @@ const Main = () => {
     const [toggleAboutComponent, setToggleAboutComponent] = useState(false);
     const [toggleContactComponent, setToggleContactComponent] = useState(false);
 
+    const [quoteList, setQuoteList] = useState([]);
+
     const toggleContact = () => {
         setToggleContactComponent(true);
         if (toggleQuoteComponent === true) {
@@ -44,7 +46,13 @@ const Main = () => {
             {toggleQuoteComponent ? <CreateQuote/> : null}
             {toggleAboutComponent ? <About/> : null}
             {toggleContactComponent ? <Contact/> : null}
-            <BottomBar toggleQuote={toggleQuote} toggleAbout={toggleAbout} toggleContact={toggleContact}/>
+            <BottomBar
+                toggleQuote={toggleQuote}
+                toggleAbout={toggleAbout}
+                toggleContact={toggleContact}
+                quoteList={quoteList}
+                setQuoteList={setQuoteList}
+            />
         </div>
     )
 }
