@@ -8,6 +8,8 @@ const CreateQuote = ({quoteList, setQuoteList}) => {
     const [email, setEmail] = useState('');
     const [number, setNumber] = useState('');
     const [notes, setNotes] = useState('');
+    const [isSubmitted, setIsSubmitted] = useState(false);
+
 
     const handleInputChange = (e) => {
         const input = e.target;
@@ -29,6 +31,7 @@ const CreateQuote = ({quoteList, setQuoteList}) => {
         }, { withCredentials: true })
             .then(res => {
                 console.log(res);
+                setIsSubmitted(true);
                 setQuoteList([...quoteList, res.data]);
             })
             .catch(err => {
@@ -38,33 +41,36 @@ const CreateQuote = ({quoteList, setQuoteList}) => {
 
     return (
         <div className='quote'>
-            <form onSubmit={handleNewQuote} className='quote-form'>
-                <div className="image-upload">
-                    <label htmlFor="file-input">Choose an image</label>
-                    <input className="file-input" type="file" id='filepath' name='filepath' onChange={e => {handleInputChange(e); }}/>
-                </div>
-                <div className="input-container">
-                    <input type="text" className="input-field" id="address" name="address" onChange={e => {setAddress(e.target.value); handleInputChange(e); }}/>
-                    <label htmlFor="address" className='input-label'>Address:</label>
-                </div>
-                <div className="input-container">
-                    <input type="text" className="input-field" id="name" name="name" onChange={e => {setName(e.target.value); handleInputChange(e); }}/>
-                    <label htmlFor="name" className='input-label'>Name:</label>
-                </div>
-                <div className="input-container">
-                    <input type="text" className="input-field" id="email" name="email" onChange={e => {setEmail(e.target.value); handleInputChange(e); }}/>
-                    <label htmlFor="email" className='input-label'>Email:</label>
-                </div>
-                <div className="input-container">
-                    <input type="text" className="input-field" id="number" name="number" onChange={e => {setNumber(e.target.value); handleInputChange(e); }}/>
-                    <label htmlFor="number" className='input-label'>Phone Number:</label>
-                </div>
-                <div className="input-container">
-                    <input type="text" className="input-field" id="notes" name="notes" onChange={e => {setNotes(e.target.value); handleInputChange(e); }}/>
-                    <label htmlFor="notes" className='input-label'>Notes:</label>
-                </div>
-                <button type="submit" className="submit-button">Submit</button>
-            </form>
+            {!isSubmitted ? (
+                <form onSubmit={handleNewQuote} className='quote-form'>
+                    <div className="image-upload">
+                        <label htmlFor="file-input">Choose an image</label>
+                        <input className="file-input" type="file" id='filepath' name='filepath' onChange={e => {handleInputChange(e); }}/>
+                    </div>
+                    <div className="input-container">
+                        <input type="text" className="input-field" id="address" name="address" onChange={e => {setAddress(e.target.value); handleInputChange(e); }}/>
+                        <label htmlFor="address" className='input-label'>Address:</label>
+                    </div>
+                    <div className="input-container">
+                        <input type="text" className="input-field" id="name" name="name" onChange={e => {setName(e.target.value); handleInputChange(e); }}/>
+                        <label htmlFor="name" className='input-label'>Name:</label>
+                    </div>
+                    <div className="input-container">
+                        <input type="text" className="input-field" id="email" name="email" onChange={e => {setEmail(e.target.value); handleInputChange(e); }}/>
+                        <label htmlFor="email" className='input-label'>Email:</label>
+                    </div>
+                    <div className="input-container">
+                        <input type="text" className="input-field" id="number" name="number" onChange={e => {setNumber(e.target.value); handleInputChange(e); }}/>
+                        <label htmlFor="number" className='input-label'>Phone Number:</label>
+                    </div>
+                    <div className="input-container">
+                        <input type="text" className="input-field" id="notes" name="notes" onChange={e => {setNotes(e.target.value); handleInputChange(e); }}/>
+                        <label htmlFor="notes" className='input-label'>Notes:</label>
+                    </div>
+                    <button type="submit" className="submit-button">Submit</button>
+                </form>
+            ) : <p>Thank you for your quote!</p>}
+            
         </div>
     )
 }
