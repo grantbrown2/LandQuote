@@ -22,6 +22,6 @@ const quoteSchema = new mongoose.Schema({
         type: String,
         default: ""
     },
-    pictures: [{ filename: String, path: String }],
+    quoteImages: [String], // This will hold the paths of all uploaded files
 }, {timestamps: true});
 module.exports = mongoose.model('Quote', quoteSchema);

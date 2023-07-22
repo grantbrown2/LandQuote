@@ -1,7 +1,14 @@
 const UserController = require('../controllers/user.controller');
 const QuoteController = require('../controllers/quote.controller');
+
 const { authenticate, getIdFromCookie } = require('../config/jwt.config');
 const { get } = require('mongoose');
+const multer = require('multer');
+
+const upload = multer({ dest: 'uploads/' });
+
+
+
 
 module.exports = (app) => {
     app.use(function(req, res, next) {
@@ -11,6 +18,7 @@ module.exports = (app) => {
         );
         next();
     })
+    app.post('/api/quote/submit', upload.array('quoteImages'), QuoteController.createQuote);
     app.post('/api/users/register', UserController.createUser);
     app.post('/api/users/login', UserController.loginUser);
     app.post('/api/users/logout', UserController.logout);
