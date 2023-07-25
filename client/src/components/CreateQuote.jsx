@@ -56,7 +56,7 @@ const CreateQuote = ({quoteList, setQuoteList}) => {
             <form onSubmit={handleNewQuote} className='quote-form'>
                 <div className="image-upload">
                     <label htmlFor="file-input">Choose an image</label>
-                    <input className="file-input" type="file" id='file-input' name='quoteImages' onChange={e => {handleInputChange(e); }}/>
+                    <input className="file-input" type="file" id='file-input' name='quoteImages' onChange={e => {handleFileChange(e); }}/>
                 </div>
                 <div className="input-container">
                     <input type="text" className="input-field" id="address" name="address" onChange={e => {setAddress(e.target.value); handleInputChange(e); }}/>
