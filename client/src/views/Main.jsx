@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
 import Header from '../components/Header'
 import BottomBar from '../components/BottomBar'
 import WithAuth from '../components/WithAuth'
@@ -6,13 +7,30 @@ import About from '../components/About'
 import Contact from '../components/Contact'
 import '../styles/Main.css'
 import CreateQuote from '../components/CreateQuote'
+import AdminPanel from '../components/AdminPanel'
 
 const Main = () => {
     const [toggleQuoteComponent, setToggleQuoteComponent] = useState(true);
     const [toggleAboutComponent, setToggleAboutComponent] = useState(false);
     const [toggleContactComponent, setToggleContactComponent] = useState(false);
 
+    const [isAdmin, setIsAdmin] = useState(false);
+
     const [quoteList, setQuoteList] = useState([]);
+
+    useEffect(() => {
+        // Function to fetch user data
+        const fetchUserData = () => {
+            axios.get('http://localhost:8000/api/users/self', { withCredentials: true })
+                .then(res => {
+                    setIsAdmin(res.data.user.admin);
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+        };
+        fetchUserData();
+    }, []);
 
     const toggleContact = () => {
         setToggleContactComponent(true);
@@ -43,9 +61,13 @@ const Main = () => {
     return (
         <div className='main'>
             <Header/>
-            {toggleQuoteComponent ? <CreateQuote/> : null}
-            {toggleAboutComponent ? <About/> : null}
-            {toggleContactComponent ? <Contact/> : null}
+            {isAdmin ? (
+                <AdminPanel/>
+            ) : (
+                toggleQuoteComponent && <CreateQuote />
+            )}
+            {toggleAboutComponent ? <About /> : null}
+            {toggleContactComponent ? <Contact /> : null}
             <BottomBar
                 toggleQuote={toggleQuote}
                 toggleAbout={toggleAbout}

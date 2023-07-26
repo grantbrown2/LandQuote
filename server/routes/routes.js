@@ -18,7 +18,6 @@ module.exports = (app) => {
         );
         next();
     })
-    app.post('/api/quote/submit', upload.array('quoteImages'), QuoteController.createQuote);
     app.post('/api/users/register', UserController.createUser);
     app.post('/api/users/login', UserController.loginUser);
     app.post('/api/users/logout', UserController.logout);
@@ -28,5 +27,6 @@ module.exports = (app) => {
     app.patch('/api/users/update', authenticate, getIdFromCookie, UserController.updateUser);
     app.delete('/api/users/delete', authenticate, getIdFromCookie, UserController.deleteUser);
     
-    app.post('/api/quote/submit', QuoteController.createQuote);
+    app.get('/api/quotes/all', authenticate, getIdFromCookie, QuoteController.getAllQuotes);
+    app.post('/api/quote/submit', upload.array('quoteImages'), authenticate, getIdFromCookie, QuoteController.createQuote);
 }

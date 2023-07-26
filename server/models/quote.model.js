@@ -16,12 +16,14 @@ const quoteSchema = new mongoose.Schema({
     number: {
         type:String, 
         required: [true, "numba is required."]
-
     },
     notes: {
         type: String,
         default: ""
     },
-    quoteImages: [String], // This will hold the paths of all uploaded files
+    quoteImages: {
+        type: [String], // This will hold the paths of all uploaded files
+        required: [true, "You must choose at least 1 image!"]
+    },
 }, {timestamps: true});
 module.exports = mongoose.model('Quote', quoteSchema);

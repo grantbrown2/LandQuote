@@ -17,3 +17,11 @@
     justify-content: space-around;
     margin: 20px 0;
 }
+.preview-image {
+    width: 50%;
+    height: 200px;
+    border: 1px solid #ccc;
+    background-color: #eee;
+    background-size: cover;
+    background-position: center;
+}
