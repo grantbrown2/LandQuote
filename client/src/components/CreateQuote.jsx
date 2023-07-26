@@ -19,6 +19,7 @@ const CreateQuote = ({quoteList, setQuoteList}) => {
     const [nameError, setNameError] = useState('');
     const [emailError, setEmailError] = useState('');
     const [numberError, setNumberError] = useState('');
+    const [fileError, setFileError] = useState('');
 
     const handleInputChange = (e) => {
         const input = e.target;
@@ -43,13 +44,21 @@ const CreateQuote = ({quoteList, setQuoteList}) => {
             }
         }
 
+
         axios.post("http://localhost:8000/api/quote/submit", formData, { withCredentials: true })
             .then(res => {
+                console.log(res);
                 setIsSubmitted(true);
                 // setQuoteList([...quoteList, res.data]);
             })
             .catch(err => {
                 console.log(err);
+                const { errors } = err.response.data;
+                setAddressError(errors.address ? errors.address.message : '');
+                setNameError(errors.name ? errors.name.message : '');
+                setEmailError(errors.email ? errors.email.message : '');
+                setNumberError(errors.number ? errors.number.message : '');
+                setFileError(errors.quoteImages ? errors.quoteImages.message : '');
                 setIsSubmitted(false);
             });
     };
@@ -87,6 +96,7 @@ const CreateQuote = ({quoteList, setQuoteList}) => {
                     <div className="image-upload">
                         <label htmlFor="file-input">Choose an image</label>
                         <input className="file-input" type="file" id='file-input' name='quoteImages' onChange={e => {handleFileChange(e); }}/>
+                        {fileError && <span className="error-message">{fileError}</span>}
                         {imagePreviews.map((previewUrl, index) => (
                             <div key={index} className='preview-container'>
                                 <img src={previewUrl} alt={`Preview ${index}`} className='preview-image' />
@@ -104,14 +114,17 @@ const CreateQuote = ({quoteList, setQuoteList}) => {
                     <div className="input-container">
                         <input type="text" className="input-field" id="name" name="name" onChange={e => {setName(e.target.value); handleInputChange(e); }}/>
                         <label htmlFor="name" className='input-label'>Name:</label>
+                        {nameError && <span className="error-message">{nameError}</span>}
                     </div>
                     <div className="input-container">
                         <input type="text" className="input-field" id="email" name="email" onChange={e => {setEmail(e.target.value); handleInputChange(e); }}/>
                         <label htmlFor="email" className='input-label'>Email:</label>
+                        {emailError && <span className="error-message">{emailError}</span>}
                     </div>
                     <div className="input-container">
                         <input type="text" className="input-field" id="number" name="number" onChange={e => {setNumber(e.target.value); handleInputChange(e); }}/>
                         <label htmlFor="number" className='input-label'>Phone Number:</label>
+                        {numberError && <span className="error-message">{numberError}</span>}
                     </div>
                     <div className="input-container">
                         <input type="text" className="input-field" id="notes" name="notes" onChange={e => {setNotes(e.target.value); handleInputChange(e); }}/>

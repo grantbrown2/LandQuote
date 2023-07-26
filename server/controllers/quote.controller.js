@@ -6,6 +6,7 @@ module.exports.createQuote = (req, res) => {
 
     const {address, name, email, number, notes} = req.body;
     const quoteImages = req.files ? req.files.map(file => file.path) : []; // array of paths of the uploaded files
+
     Quote.create({
         address,
         name,
@@ -20,7 +21,7 @@ module.exports.createQuote = (req, res) => {
         })
         .catch(err => {
             console.log("Error while creating quote:", err); // Debug line
-            res.json(err)
+            res.status(400).json(err);
         });
 };
 
