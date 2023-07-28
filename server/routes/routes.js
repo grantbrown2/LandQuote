@@ -1,5 +1,6 @@
 const UserController = require('../controllers/user.controller');
 const QuoteController = require('../controllers/quote.controller');
+const ContactController = require('../controllers/contact.controller');
 
 const { authenticate, getIdFromCookie } = require('../config/jwt.config');
 const { get } = require('mongoose');
@@ -32,4 +33,6 @@ module.exports = (app) => {
     app.get('/api/quotes/all', authenticate, getIdFromCookie, QuoteController.getAllQuotes);
     
     app.post('/api/quote/submit', upload.array('quoteImages'), authenticate, getIdFromCookie, QuoteController.createQuote);
+
+    app.post('/api/send/email', ContactController.sendEmail);
 }
