@@ -1,7 +1,23 @@
 const express = require('express');
-const cookieParser = require('cookie-parser');
 const app = express();
+
+const path = require('path');
+const multer = require('multer');
+const cookieParser = require('cookie-parser');
+
 const port = 8000;
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'uploads/'); // The uploaded files will be stored in the 'uploads/' directory
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.originalname);
+    }
+  });
+
+const upload = multer({ storage: storage });
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use(cookieParser());
 

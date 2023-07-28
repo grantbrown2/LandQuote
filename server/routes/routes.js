@@ -18,6 +18,7 @@ module.exports = (app) => {
         );
         next();
     })
+    
     app.post('/api/users/register', UserController.createUser);
     app.post('/api/users/login', UserController.loginUser);
     app.post('/api/users/logout', UserController.logout);
@@ -26,7 +27,9 @@ module.exports = (app) => {
     app.get('/api/users/:username', authenticate, getIdFromCookie, UserController.findUserByName);
     app.patch('/api/users/update', authenticate, getIdFromCookie, UserController.updateUser);
     app.delete('/api/users/delete', authenticate, getIdFromCookie, UserController.deleteUser);
-    
+
+    app.delete('/api/quote/:id', authenticate, getIdFromCookie, QuoteController.deleteQuoteById);
     app.get('/api/quotes/all', authenticate, getIdFromCookie, QuoteController.getAllQuotes);
+    
     app.post('/api/quote/submit', upload.array('quoteImages'), authenticate, getIdFromCookie, QuoteController.createQuote);
 }
