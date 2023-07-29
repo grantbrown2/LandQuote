@@ -1,19 +1,19 @@
 const nodemailer = require('nodemailer');
 
 module.exports.sendEmail = async (req, res) => {
-    const {name, email, message} = req.body;
+    const {name, phoneNum, email, message} = req.body;
     const transporter = nodemailer.createTransport({
         service: 'Gmail',
         auth: {
-            user: 'ur email',
+            user: 'cho email',
             pass: 'cho password',
         },
     });
     const mailOptions = {
-        from: 'your.email@example.com', // Your email address
-        to: 'your.email@example.com', // Your email address (where you want to receive emails)
-        subject: `New Contact Form Submission from ${name}`,
-        text: `${message}\n\nContact email: ${email}`,
+        from: email, // Your email address
+        to: 'cho email', // Your email address (where you want to receive emails)
+        subject: `New Quote Request from ${name}`,
+        text: `${message}\n\nContact email: ${email}\n\nPhone Number: ${phoneNum}`,
     };
     try {
         // Send the email
@@ -24,3 +24,20 @@ module.exports.sendEmail = async (req, res) => {
         res.status(500).json({ error: 'Error sending email' });
     }
 }
+
+
+// Once you have created an application-specific password, you can use it to send email from your Google account using Nodemailer. 
+
+// Go to your Google account settings.
+// Click on the Security tab.
+// Search for App passwords section.
+// Click on the Generate new password button.
+// Give your application password a name, such as "Nodemailer".
+// Click on the Generate button.
+
+// INSERT AT THIS LOCATION 
+
+// auth: {
+//     user: 'cho email',
+//     pass: 'cho password',
+// }

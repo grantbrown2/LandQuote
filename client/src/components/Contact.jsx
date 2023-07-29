@@ -17,6 +17,10 @@ const Contact = () => {
                     <input type='text' id='name' name='name' required />
                 </div>
                 <div>
+                    <label htmlFor='phoneNum'>Phone Number:</label>
+                    <input type='tel' id='phoneNum' name='phoneNum' required />
+                </div>
+                <div>
                     <label htmlFor='email'>Email:</label>
                     <input type='email' id='email' name='email' required />
                 </div>
