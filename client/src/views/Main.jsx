@@ -13,6 +13,7 @@ const Main = () => {
     const [toggleQuoteComponent, setToggleQuoteComponent] = useState(true);
     const [toggleAboutComponent, setToggleAboutComponent] = useState(false);
     const [toggleContactComponent, setToggleContactComponent] = useState(false);
+    const [toggleAdminComponent, setToggleAdminComponent] = useState(true);
 
     const [isAdmin, setIsAdmin] = useState(false);
 
@@ -40,6 +41,9 @@ const Main = () => {
         if (toggleAboutComponent === true) {
             setToggleAboutComponent(false);
         }
+        if (toggleAdminComponent === true) {
+            setToggleAdminComponent(false);
+        }
     }
 
     const toggleAbout = () => {
@@ -50,6 +54,9 @@ const Main = () => {
         if (toggleContactComponent === true) {
             setToggleContactComponent(false);
         }
+        if (toggleAdminComponent === true) {
+            setToggleAdminComponent(false);
+        }
     }
 
     const toggleQuote = () => {
@@ -58,11 +65,17 @@ const Main = () => {
         setToggleContactComponent(false);
     };
 
+    const toggleAdminPanel = () => {
+        setToggleAdminComponent(true);
+        setToggleAboutComponent(false);
+        setToggleContactComponent(false);
+    }
+
     return (
         <div className='main'>
             <Header/>
             {isAdmin ? (
-                <AdminPanel/>
+                toggleAdminComponent ? (<AdminPanel/>) : null
             ) : (
                 toggleQuoteComponent && <CreateQuote />
             )}
@@ -72,6 +85,7 @@ const Main = () => {
                 toggleQuote={toggleQuote}
                 toggleAbout={toggleAbout}
                 toggleContact={toggleContact}
+                toggleAdminPanel={toggleAdminPanel}
                 quoteList={quoteList}
                 setQuoteList={setQuoteList}
             />
