@@ -50,9 +50,11 @@ const AdminPanel = () => {
               </div>
               {quote.quoteImages.length > 0 && (
                 <div className="quote-images">
-                  {quote.quoteImages.map((image, index) => (
-                    <img key={index} src={image} alt={`Quote Image ${index + 1}`} />
-                  ))}
+                  {quote.quoteImages.map((image, index) => {
+                    const imageURL = `http://localhost:8000/${image.replace(/\\/g, '/')}`; // Replace backslashes with forward slashes
+                    console.log('Image URL:', imageURL);
+                    return <img key={index} src={imageURL} alt={`Quote Image ${index + 1}`} />;
+                  })}
                 </div>
               )}
               <button className="delete-button" onClick={() => handleDelete(quote._id)}>

@@ -12,11 +12,12 @@ async function renameFilesWithExtension(filePaths, newExtension) {
     for (const filePath of filePaths) {
       const fileDir = path.dirname(filePath);
       const oldFileName = path.basename(filePath);
-      const newFileName = path.join(fileDir, `${path.parse(oldFileName).name}${newExtension}`);
+      const newFileName = `${path.parse(oldFileName).name}${newExtension}`;
+      const newPath = path.join(fileDir, newFileName);
       
       try {
-        await fs.rename(filePath, newFileName);
-        renamedFilePaths.push(newFileName);
+        await fs.rename(filePath, newPath);
+        renamedFilePaths.push(newPath);
       } catch (err) {
         console.error(`Error renaming file: ${filePath}`, err);
       }
@@ -26,18 +27,14 @@ async function renameFilesWithExtension(filePaths, newExtension) {
   }
 
   module.exports.createQuote = async (req, res) => {
-    console.log("Request body:", req.body); // Debug line
-    console.log("Request files:", req.files); // Debug line
+    console.log("Request body:", req.body);
+    console.log("Request files:", req.files);
 
     const { address, name, email, number, notes } = req.body;
-    const quoteImages = req.files ? req.files.map(file => file.path) : []; // array of paths of the uploaded files
+    const quoteImages = req.files ? req.files.map(file => file.path) : [];
 
     // Rename the uploaded files with the detected file type as extension
     const renamedQuoteImages = await renameFilesWithExtension(quoteImages, '.jpg');
-
-    // Extract the file extension from the renamed paths and add them to the quoteImages array
-    const quoteImageExtensions = renamedQuoteImages.map(filePath => path.extname(filePath));
-    const quoteImagesWithExtensions = renamedQuoteImages.map((filePath, index) => filePath + quoteImageExtensions[index]);
 
     Quote.create({
         address,
@@ -45,17 +42,20 @@ async function renameFilesWithExtension(filePaths, newExtension) {
         email,
         number,
         notes,
-        quoteImages: quoteImagesWithExtensions, // using the renamed image paths with '.jpg' extension
+        quoteImages: renamedQuoteImages, // Use the renamed image paths with '.jpg' extension
     })
     .then(quote => {
-        console.log("Created quote:", quote); // Debug line
+        console.log("Created quote:", quote);
         res.json(quote);
     })
     .catch(err => {
-        console.log("Error while creating quote:", err); // Debug line
+        console.log("Error while creating quote:", err);
         res.status(400).json(err);
     });
 };
+
+
+
 module.exports.getAllQuotes = (req, res) => {
     Quote.find({})
       .then((quotes) => res.json(quotes))
