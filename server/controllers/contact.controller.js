@@ -5,13 +5,13 @@ module.exports.sendEmail = async (req, res) => {
     const transporter = nodemailer.createTransport({
         service: 'Gmail',
         auth: {
-            user: 'gbrownzzzz58@gmail.com',
-            pass: 'upxkvmgdkuvxvmhx',
+            user: 'cho email',
+            pass: 'cho password',
         },
     });
     const mailOptions = {
         from: email, // Your email address
-        to: 'gbrownzzzz58@gmail.com', // Your email address (where you want to receive emails)
+        to: 'cho email', // Your email address (where you want to receive emails)
         subject: `New Quote Request from ${name}`,
         text: `${message}\n\nContact email: ${email}\n\nPhone Number: ${phoneNum}`,
     };
