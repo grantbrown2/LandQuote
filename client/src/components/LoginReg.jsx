@@ -2,13 +2,11 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import axios from 'axios';
+import Logo from '../styles/LandQuoteLogo.png'
 import '../styles/LoginReg.css'
 const LoginReg = () => {
 
-    const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [errors, setErrors] = useState([]);
@@ -19,9 +17,6 @@ const LoginReg = () => {
     const registerHandler = (e) => {
         e.preventDefault();
         axios.post("http://localhost:8000/api/users/register", {
-            username,
-            firstName,
-            lastName,
             email,
             password,
             confirmPassword 
@@ -74,80 +69,69 @@ const LoginReg = () => {
     }
 
     return (
-        <div className='loginreg-container'>
-        <i style={{ "--clr": "black" }}></i>
-        <i style={{ "--clr": "black" }}></i>
-        <i style={{ "--clr": "black" }}></i>
-            <div className='logo-container'>
+        <div className="test">
+        <img src={Logo} alt="Logo" className='logo-login'/>
+            <div className='loginreg-container'>
+                <i style={{ "--clr": "black" }}></i>
+                <i style={{ "--clr": "black" }}></i>
+                <i style={{ "--clr": "black" }}></i>
+                <div className="slider-box">
+                    <input id='slider' type='checkbox' checked={formToggle} onChange={handleFormToggle}/>
+                    <label className='login-label' htmlFor='slider'>Login</label>
+                    <label className='register-label' htmlFor='slider'>Register</label>
+                    <span className="slider"></span>
+                </div>
+                <ul className="social-icon2">
 
+                </ul>
+                {formToggle ? (
+                    <>
+                        <div className="login-form">
+                            <form onSubmit={loginHandler}>
+                                { loginErrors ? <p className="text-danger">{loginErrors}</p> : "" }
+                                <div className="input-container-login">
+                                    <input type="email" className="input-field-login" id="email" name="email" onChange={e => {setEmail(e.target.value); handleInputChange(e); }} />
+                                    <label htmlFor="email" className='input-label-login'>Email:</label>
+                                </div>
+                                <div className="input-container-login">
+                                    <input type="password" className="input-field-login" id="password" name="password" onChange={e => {setPassword(e.target.value); handleInputChange(e); }} />
+                                    <label htmlFor="password" className='input-label-login'>Password:</label>
+                                </div>
+                                {/* <div className="input-container">
+                                    <input type="tel" className="input-field" id="number" name="number" />
+                                    <label htmlFor="number" className='input-label'>Phone Number:</label>
+                                </div> */}
+                                <button type="submit" className="submit-button">Login</button>
+                            </form>
+                        </div>
+                    </>
+                ) : (
+                    <>
+                        <div className="registration-form">
+                            <form onSubmit={registerHandler} className='register'>
+                                {errors.map((err, index) => (
+                                    <p key={index} className="text-danger">{err}</p>
+                                ))}
+                                <div className="input-container-login">
+                                    <input type="email" className="input-field-login" id="email" name="email" onChange={e => {setEmail(e.target.value);  handleInputChange(e); }} />
+                                    <label htmlFor="email" className='input-label-login'>Email:</label>
+                                </div>
+                                <div className="input-container-login">
+                                    <input type="password" className="input-field-login" id="password" name="password" onChange={e => {setPassword(e.target.value);  handleInputChange(e); }} />
+                                    <label htmlFor="password" className='input-label-login'>Password:</label>
+                                </div>
+                                <div className="input-container-login">
+                                    <input type="password" className="input-field-login" id="confirmPassword" name="confirmPassword" onChange={e => {setConfirmPassword(e.target.value);  handleInputChange(e); }} />
+                                    <label htmlFor="confirmPassword" className='input-label-login'>Confirm Password:</label>
+                                </div>
+                                <button type="submit" className="submit-button">Register</button>
+                            </form>
+                        </div>
+                    </>
+                )}
             </div>
-            <div className="slider-box">
-                <input id='slider' type='checkbox' checked={formToggle} onChange={handleFormToggle}/>
-                <label className='login-label' htmlFor='slider'>Login</label>
-                <label className='register-label' htmlFor='slider'>Register</label>
-                <span className="slider"></span>
-            </div>
-            <ul className="social-icon2">
-
-            </ul>
-            {formToggle ? (
-                <>
-                    <div className="login-form">
-                        <form onSubmit={loginHandler}>
-                            { loginErrors ? <p className="text-danger">{loginErrors}</p> : "" }
-                            <div className="input-container">
-                                <input type="email" className="input-field" id="email" name="email" onChange={e => {setEmail(e.target.value); handleInputChange(e); }} />
-                                <label htmlFor="email" className='input-label'>Email:</label>
-                            </div>
-                            <div className="input-container">
-                                <input type="password" className="input-field" id="password" name="password" onChange={e => {setPassword(e.target.value); handleInputChange(e); }} />
-                                <label htmlFor="password" className='input-label'>Password:</label>
-                            </div>
-                            {/* <div className="input-container">
-                                <input type="tel" className="input-field" id="number" name="number" />
-                                <label htmlFor="number" className='input-label'>Phone Number:</label>
-                            </div> */}
-                            <button type="submit" className="btn">Login</button>
-                        </form>
-                    </div>
-                </>
-            ) : (
-                <>
-                    <div className="registration-form">
-                        <form onSubmit={registerHandler} className='register'>
-                            {errors.map((err, index) => (
-                                <p key={index} className="text-danger">{err}</p>
-                            ))}
-                            <div className="input-container">
-                                <input type="text" className="input-field" id="username" name="username" onChange={e => {setUsername(e.target.value);  handleInputChange(e); }} />
-                                <label htmlFor="username" className='input-label'>Username:</label>
-                            </div>
-                            <div className="input-container">
-                                <input type="text" className="input-field" id="firstName" name="firstName" onChange={e => {setFirstName(e.target.value);  handleInputChange(e); }} />
-                                <label htmlFor="firstName" className='input-label'>First Name:</label>
-                            </div>
-                            <div className="input-container">
-                                <input type="text" className="input-field" id="lastName" name="lastName" onChange={e => {setLastName(e.target.value);  handleInputChange(e); }} />
-                                <label htmlFor="lastName" className='input-label'>Last Name:</label>
-                            </div>
-                            <div className="input-container">
-                                <input type="email" className="input-field" id="email" name="email" onChange={e => {setEmail(e.target.value);  handleInputChange(e); }} />
-                                <label htmlFor="email" className='input-label'>Email:</label>
-                            </div>
-                            <div className="input-container">
-                                <input type="password" className="input-field" id="password" name="password" onChange={e => {setPassword(e.target.value);  handleInputChange(e); }} />
-                                <label htmlFor="password" className='input-label'>Password:</label>
-                            </div>
-                            <div className="input-container">
-                                <input type="password" className="input-field" id="confirmPassword" name="confirmPassword" onChange={e => {setConfirmPassword(e.target.value);  handleInputChange(e); }} />
-                                <label htmlFor="confirmPassword" className='input-label'>Confirm Password:</label>
-                            </div>
-                            <button type="submit" className="submit-button">Register</button>
-                        </form>
-                    </div>
-                </>
-            )}
         </div>
+        
     )
 }
 

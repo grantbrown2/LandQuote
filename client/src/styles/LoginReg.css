@@ -1,5 +1,5 @@
 body {
-    background: url("./background.png");
+    background: url("./background-vertical.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     margin: 0;
@@ -10,14 +10,23 @@ body {
     align-items: center;
     min-height: 100vh;
 }
+.logo-login {
+    position: absolute;
+    top: 2%;
+    left: 50%;
+    transform: translate(-50%);
+    caret-color: transparent;
+}
 @media (min-width: 768px) {
     body {
-        background-image: url("./background-verticle.jpg");
+        background-image: url("./background-vertical.jpg");
     }
 }
 @media (min-width: 1200px) {
     body {
-        background-image: url("./background.png");
+        background-image: url("./background-horizontal.jpg");
+        background-size:cover;
+        width: 100vw;
     }
 }
 .loginreg-container {
@@ -83,52 +92,78 @@ body {
 
 
 
+input {
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: none;
+    font: inherit;
+    color: inherit;
+    display: inline-block;
+    vertical-align: middle;
+    box-sizing: border-box;
+}
 
-.input-field:-webkit-autofill {
+.input-field-login:-webkit-autofill {
     -webkit-box-shadow: 0 0 0 30px white inset; /* Set a large box shadow to override the default background color */
     -webkit-text-fill-color: #333; /* Set the text color */
     transition: background-color 5000s ease-in-out 0s; /* Prevent the background color transition */
 }
 
-.input-container {
+.login-form,.registration-form {
+    height: 215px;
+    width: 350px;
+    background-color: black;
+    border-radius: 15px;
+}
+.registration-form {
+    position: absolute;
+    top: 20%;
+    height: 300px;
+}
+
+.input-container-login {
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.input-field {
-    border: 1px solid lightgrey;
-    border-radius: 6px;
+.input-field-login {
     padding: 10px;
     min-width: 250px;
-    margin-bottom: 20px;
-    /* Adjust the width to your preference */
+    margin: 20px 0;
+    background: none;
+    border-top: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    color: #fff;
 }
 
-.input-label {
+.input-label-login {
     position: absolute;
     top: 50%;
-    left: 125px;
+    left: 55px;
     padding: 0 5px;
-    transform: translateY(135%);
+    transform: translateY(275%);
     pointer-events: none;
     transition: transform 0.3s ease-in-out;
     caret-color: transparent;
+    color: #fff;
+    background-color: black;
 }
 
-.input-field:hover+.input-label,
-.input-field:focus+.input-label, 
-.input-field.has-content+.input-label {
-    transform: translateY(20%);
-    background-color: #fff;
+.input-field-login:hover+.input-label-login,
+.input-field-login:focus+.input-label-login, 
+.input-field-login.has-content+.input-label-login {
+    transform: translateY(150%);
+    background-color: black;
     /* Adjust the translateY value to slide the label up */
 }
 
-.input-field:focus+.input-label,
-.input-field:not(:placeholder-shown)+.input-label,
-.input-field:valid+.input-label,
-.input-field.has-content+.input-label {
+.input-field-login:focus+.input-label-login,
+.input-field-login:not(:placeholder-shown)+.input-label-login,
+.input-field-login:valid+.input-label-login,
+.input-field-login.has-content+.input-label-login {
     top: -12px;
     /* Adjust the top position when the input is focused or has content */
     font-size: 12px;
@@ -140,14 +175,24 @@ body {
 .submit-button {
     margin: 25px auto;
     z-index: 2;
+    margin: 0;
+    padding: 3px;
+    border: none;
+    background: none;
+    font: inherit;
+    color: #fff;
+    display: inline-block;
+    vertical-align: middle;
+    box-sizing: border-box;
+    cursor: pointer;
 }
 
 
 .slider-box {
     width: 220px;
-    margin: 0 auto;
     padding: 10px;
-    position: relative;
+    position: absolute;
+    top: 55px;
     box-shadow: 0 0 20px 9px #3f3f3f1f;
     border-radius: 30px;
     cursor: pointer;
@@ -162,7 +207,7 @@ body {
     outline: none;
     position: relative;
     z-index: 2;
-    color: #333;
+    color: #fff;
 }
 #slider {
     display: none;
@@ -181,45 +226,3 @@ body {
 #slider:checked ~ .slider {
     transform: translateX(0);
 }
-
-
-
-
-
-
-
-.social-icon2 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0;
-    margin: 25px 0;
-}
-.social-icon__link2 {
-    font-size: 2rem;
-    color: #350f0f;
-    margin: 0 5px;
-    transition: 0.5s;
-}
-.social-icon__link2:hover {
-    transform: translateY(-10px);
-    position: relative;
-}
-.social-icon__link2:hover::before {
-    content: 'GitHub Profile';
-    position: absolute;
-    top: -25%;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 5px;
-    font-size: 10px;
-    white-space: nowrap;
-}
-.social-icon__item2 {
-    list-style: none;
-}
-
-
-
-
-
