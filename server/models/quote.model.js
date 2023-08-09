@@ -9,9 +9,10 @@ const quoteSchema = new mongoose.Schema({
         type:String,
         required: [true, "name is required."]
     },
-    email: {
-        type:String,
-        required: [true, "email is required."]
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
     },
     number: {
         type:String, 

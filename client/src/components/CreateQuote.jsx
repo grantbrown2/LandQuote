@@ -17,7 +17,6 @@ const CreateQuote = ({quoteList, setQuoteList}) => {
     
     const [addressError, setAddressError] = useState('');
     const [nameError, setNameError] = useState('');
-    const [emailError, setEmailError] = useState('');
     const [numberError, setNumberError] = useState('');
     const [fileError, setFileError] = useState('');
 
@@ -56,7 +55,6 @@ const CreateQuote = ({quoteList, setQuoteList}) => {
                 const { errors } = err.response.data;
                 setAddressError(errors.address ? errors.address.message : '');
                 setNameError(errors.name ? errors.name.message : '');
-                setEmailError(errors.email ? errors.email.message : '');
                 setNumberError(errors.number ? errors.number.message : '');
                 setFileError(errors.quoteImages ? errors.quoteImages.message : '');
                 setIsSubmitted(false);
@@ -90,52 +88,55 @@ const CreateQuote = ({quoteList, setQuoteList}) => {
     };
 
     return (
-        <div className='quote'>
-            {!isSubmitted ? (
-                <form onSubmit={handleNewQuote} className='quote-form'>
-                    <div className="image-upload">
-                        <label htmlFor="file-input">Choose an image</label>
-                        <input className="file-input" type="file" id='file-input' name='quoteImages' onChange={e => {handleFileChange(e); }}/>
-                        {fileError && <span className="error-message">{fileError}</span>}
+        <div className="quote-container">
+            <div className='quote'>
+                {!isSubmitted ? (
+                    <form onSubmit={handleNewQuote} className='quote-form'>
+                        <div className="image-upload">
+                            <label htmlFor="file-input">Choose an image</label>
+                            <input className="file-input" type="file" id='file-input' name='quoteImages' onChange={e => { handleFileChange(e); }} />
+                            {fileError && <span className="error-message">{fileError}</span>}
+                        </div>
+
+                        <div className='preview-container'>
                         {imagePreviews.map((previewUrl, index) => (
-                            <div key={index} className='preview-container'>
-                                <img src={previewUrl} alt={`Preview ${index}`} className='preview-image' />
-                                <button type='button' onClick={() => handleRemoveImage(index)}>
-                                    Remove
-                                </button>
+                                <div key={index} className="preview-image-container">
+                                    <img src={previewUrl} alt={`Preview ${index}`} className='preview-image' />
+                                    <button type='button' onClick={() => handleRemoveImage(index)} className='remove-preview-image'>
+                                        X
+                                    </button>
+                                </div>
+                            ))}
+                        </div>
+                        <div className="bottom-inputs">
+                            <div className="input-container">
+                                <input type="text" className="input-field-quote" id="address" name="address" onChange={e => { setAddress(e.target.value); handleInputChange(e); }} />
+                                <label htmlFor="address" className='input-label-quote'>Address:</label>
+                                {addressError && <span className="error-message">{addressError}</span>}
                             </div>
-                        ))}
-                    </div>
-                    <div className="input-container">
-                        <input type="text" className="input-field" id="address" name="address" onChange={e => {setAddress(e.target.value); handleInputChange(e); }}/>
-                        <label htmlFor="address" className='input-label'>Address:</label>
-                        {addressError && <span className="error-message">{addressError}</span>}
-                    </div>
-                    <div className="input-container">
-                        <input type="text" className="input-field" id="name" name="name" onChange={e => {setName(e.target.value); handleInputChange(e); }}/>
-                        <label htmlFor="name" className='input-label'>Name:</label>
-                        {nameError && <span className="error-message">{nameError}</span>}
-                    </div>
-                    <div className="input-container">
-                        <input type="text" className="input-field" id="email" name="email" onChange={e => {setEmail(e.target.value); handleInputChange(e); }}/>
-                        <label htmlFor="email" className='input-label'>Email:</label>
-                        {emailError && <span className="error-message">{emailError}</span>}
-                    </div>
-                    <div className="input-container">
-                        <input type="text" className="input-field" id="number" name="number" onChange={e => {setNumber(e.target.value); handleInputChange(e); }}/>
-                        <label htmlFor="number" className='input-label'>Phone Number:</label>
-                        {numberError && <span className="error-message">{numberError}</span>}
-                    </div>
-                    <div className="input-container">
-                        <input type="text" className="input-field" id="notes" name="notes" onChange={e => {setNotes(e.target.value); handleInputChange(e); }}/>
-                        <label htmlFor="notes" className='input-label'>Notes:</label>
-                    </div>
-                    <button type="submit" className="submit-button">Submit</button>
-                </form>
-            ) : 
-            <CompletionQuote/>
-            }
+                            <div className="input-container">
+                                <input type="text" className="input-field-quote" id="name" name="name" onChange={e => { setName(e.target.value); handleInputChange(e); }} />
+                                <label htmlFor="name" className='input-label-quote'>Name:</label>
+                                {nameError && <span className="error-message">{nameError}</span>}
+                            </div>
+                            <div className="input-container">
+                                <input type="text" className="input-field-quote" id="number" name="number" onChange={e => { setNumber(e.target.value); handleInputChange(e); }} />
+                                <label htmlFor="number" className='input-label-quote'>Phone Number:</label>
+                                {numberError && <span className="error-message">{numberError}</span>}
+                            </div>
+                            <div className="input-container">
+                                <input type="text" className="input-field-quote" id="notes" name="notes" onChange={e => { setNotes(e.target.value); handleInputChange(e); }} />
+                                <label htmlFor="notes" className='input-label-quote'>Notes:</label>
+                            </div>
+                        <button type="submit" className="submit-button">Submit</button>
+                        </div>
+                    </form>
+                ) :
+                    <CompletionQuote />
+                }
+            </div>
         </div>
+        
     )
 }
 

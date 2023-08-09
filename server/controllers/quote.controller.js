@@ -1,9 +1,11 @@
 const fs = require('fs').promises;
 
 const path = require('path');
-const fileType = require('file-type-ext'); // Use file-type-ext instead of file-type
+const jwt = require('jsonwebtoken');
+const { secret } = require('../config/jwt.config');
 
 const Quote = require('../models/quote.model');
+const User = require('../models/user.model');
 
 
 async function renameFilesWithExtension(filePaths, newExtension) {
@@ -30,8 +32,20 @@ async function renameFilesWithExtension(filePaths, newExtension) {
     console.log("Request body:", req.body);
     console.log("Request files:", req.files);
 
-    const { address, name, email, number, notes } = req.body;
+    const { address, name, number, notes } = req.body;
     const quoteImages = req.files ? req.files.map(file => file.path) : [];
+
+    // Extract user ID from the token
+    const token = req.cookies.usertoken;
+    const decodedToken = jwt.verify(token, secret);
+    const userId = decodedToken.id;
+
+    // Fetch user's email from the database
+    const user = await User.findById(userId);
+    if (!user) {
+        return res.status(404).json({ message: "User not found" });
+    }
+    const email = user.email;
 
     // Rename the uploaded files with the detected file type as extension
     const renamedQuoteImages = await renameFilesWithExtension(quoteImages, '.jpg');
@@ -39,7 +53,7 @@ async function renameFilesWithExtension(filePaths, newExtension) {
     Quote.create({
         address,
         name,
-        email,
+        user: userId,
         number,
         notes,
         quoteImages: renamedQuoteImages, // Use the renamed image paths with '.jpg' extension
@@ -58,6 +72,7 @@ async function renameFilesWithExtension(filePaths, newExtension) {
 
 module.exports.getAllQuotes = (req, res) => {
     Quote.find({})
+      .populate('user', 'email')
       .then((quotes) => res.json(quotes))
       .catch((err) => res.json(err));
 };
