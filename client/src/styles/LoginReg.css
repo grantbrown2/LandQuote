@@ -17,9 +17,14 @@ body {
     transform: translate(-50%);
     caret-color: transparent;
 }
-@media (min-width: 768px) {
+@media (max-width: 768px) {
     body {
         background-image: url("./background-vertical.jpg");
+    }
+    .loginreg-container i,
+    .loginreg-container i:hover {
+        animation: none !important;
+        opacity:0!important ;
     }
 }
 @media (min-width: 1200px) {
@@ -81,16 +86,20 @@ body {
 
 
 
-.text-danger {
+.text-danger,.email-error,.password-error,.confirmPassword-error {
     color: #ff0000;
     font-size: 10px;
     margin: 2px 0;
+    position: absolute;
+    right: 150px;
+    font-weight: bold;
 }
-
-
-
-
-
+.password-error{
+    right: 125px;
+}
+.confirmPassword-error {
+    right: 75px;
+}
 
 input {
     margin: 0;

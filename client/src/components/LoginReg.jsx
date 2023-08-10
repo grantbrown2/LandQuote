@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import axios from 'axios';
@@ -14,6 +14,10 @@ const LoginReg = () => {
     const [formToggle, setFormToggle] = useState(true);
     const navigate = useNavigate();
 
+    const [emailError, setEmailError] = useState('');
+    const [passwordError, setPasswordError] = useState('');
+    const [confirmPasswordError, setConfirmPasswordError] = useState('');
+
     const registerHandler = (e) => {
         e.preventDefault();
         axios.post("http://localhost:8000/api/users/register", {
@@ -26,12 +30,10 @@ const LoginReg = () => {
             })
             .catch(err => {
                 console.log(err);
-                const errorResponse = err.response.data.errors;
-                const errorArray = [];
-                for (const key of Object.keys(errorResponse)) {
-                    errorArray.push(errorResponse[key].message)
-                }
-                setErrors(errorArray);
+                const {errors} = err.response.data;
+                setEmailError(errors.email ? errors.email.message : '');
+                setPasswordError(errors.password ? errors.password.message : '');
+                setConfirmPasswordError(errors.confirmPassword ? errors.confirmPassword.message : '');
             })
     }
 
@@ -51,7 +53,7 @@ const LoginReg = () => {
             })
             .catch(err => {
                 console.log(err);
-                setLoginErrors(err.response.data);
+                setEmailError(err.response.data);
             })
     }
 
@@ -88,7 +90,7 @@ const LoginReg = () => {
                     <>
                         <div className="login-form">
                             <form onSubmit={loginHandler}>
-                                { loginErrors ? <p className="text-danger">{loginErrors}</p> : "" }
+                                {emailError && <p className='text-danger'>{emailError}</p>}
                                 <div className="input-container-login">
                                     <input type="email" className="input-field-login" id="email" name="email" onChange={e => {setEmail(e.target.value); handleInputChange(e); }} />
                                     <label htmlFor="email" className='input-label-login'>Email:</label>
@@ -97,10 +99,6 @@ const LoginReg = () => {
                                     <input type="password" className="input-field-login" id="password" name="password" onChange={e => {setPassword(e.target.value); handleInputChange(e); }} />
                                     <label htmlFor="password" className='input-label-login'>Password:</label>
                                 </div>
-                                {/* <div className="input-container">
-                                    <input type="tel" className="input-field" id="number" name="number" />
-                                    <label htmlFor="number" className='input-label'>Phone Number:</label>
-                                </div> */}
                                 <button type="submit" className="submit-button">Login</button>
                             </form>
                         </div>
@@ -109,17 +107,17 @@ const LoginReg = () => {
                     <>
                         <div className="registration-form">
                             <form onSubmit={registerHandler} className='register'>
-                                {errors.map((err, index) => (
-                                    <p key={index} className="text-danger">{err}</p>
-                                ))}
+                                {emailError && <p className='email-error'>{emailError}</p>}
                                 <div className="input-container-login">
                                     <input type="email" className="input-field-login" id="email" name="email" onChange={e => {setEmail(e.target.value);  handleInputChange(e); }} />
                                     <label htmlFor="email" className='input-label-login'>Email:</label>
                                 </div>
+                                {passwordError && <p className='password-error'>{passwordError}</p>}
                                 <div className="input-container-login">
                                     <input type="password" className="input-field-login" id="password" name="password" onChange={e => {setPassword(e.target.value);  handleInputChange(e); }} />
                                     <label htmlFor="password" className='input-label-login'>Password:</label>
                                 </div>
+                                {confirmPasswordError && <p className='confirmPassword-error'>{confirmPasswordError}</p>}
                                 <div className="input-container-login">
                                     <input type="password" className="input-field-login" id="confirmPassword" name="confirmPassword" onChange={e => {setConfirmPassword(e.target.value);  handleInputChange(e); }} />
                                     <label htmlFor="confirmPassword" className='input-label-login'>Confirm Password:</label>

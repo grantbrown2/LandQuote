@@ -3,11 +3,11 @@ const mongoose = require('mongoose');
 const quoteSchema = new mongoose.Schema({
     address: {
         type:String,
-        required: [true, "addy is required."]
+        required: [true, "Address required!"]
     },
     name: {
         type:String,
-        required: [true, "name is required."]
+        required: [true, "Name is required!"]
     },
     user: {
         type: mongoose.Schema.Types.ObjectId,
@@ -16,7 +16,7 @@ const quoteSchema = new mongoose.Schema({
     },
     number: {
         type:String, 
-        required: [true, "numba is required."]
+        required: [true, "Phone number is required!"]
     },
     notes: {
         type: String,

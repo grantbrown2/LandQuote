@@ -100,29 +100,29 @@ const CreateQuote = ({quoteList, setQuoteList}) => {
 
                         <div className='preview-container'>
                         {imagePreviews.map((previewUrl, index) => (
-                                <div key={index} className="preview-image-container">
-                                    <img src={previewUrl} alt={`Preview ${index}`} className='preview-image' />
-                                    <button type='button' onClick={() => handleRemoveImage(index)} className='remove-preview-image'>
-                                        X
-                                    </button>
-                                </div>
-                            ))}
+                            <div key={index} className="preview-image-container">
+                                <img src={previewUrl} alt={`Preview ${index}`} className='preview-image' />
+                                <button type='button' onClick={() => handleRemoveImage(index)} className='remove-preview-image'>
+                                    X
+                                </button>
+                            </div>
+                        ))}
                         </div>
                         <div className="bottom-inputs">
                             <div className="input-container">
                                 <input type="text" className="input-field-quote" id="address" name="address" onChange={e => { setAddress(e.target.value); handleInputChange(e); }} />
                                 <label htmlFor="address" className='input-label-quote'>Address:</label>
-                                {addressError && <span className="error-message">{addressError}</span>}
+                                {addressError && <p className="error-message-addy">{addressError}</p>}
                             </div>
                             <div className="input-container">
                                 <input type="text" className="input-field-quote" id="name" name="name" onChange={e => { setName(e.target.value); handleInputChange(e); }} />
                                 <label htmlFor="name" className='input-label-quote'>Name:</label>
-                                {nameError && <span className="error-message">{nameError}</span>}
+                                {nameError && <p className="error-message-name">{nameError}</p>}
                             </div>
                             <div className="input-container">
                                 <input type="text" className="input-field-quote" id="number" name="number" onChange={e => { setNumber(e.target.value); handleInputChange(e); }} />
                                 <label htmlFor="number" className='input-label-quote'>Phone Number:</label>
-                                {numberError && <span className="error-message">{numberError}</span>}
+                                {numberError && <p className="error-message-number">{numberError}</p>}
                             </div>
                             <div className="input-container">
                                 <input type="text" className="input-field-quote" id="notes" name="notes" onChange={e => { setNotes(e.target.value); handleInputChange(e); }} />
