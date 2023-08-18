@@ -58,3 +58,19 @@
     font-size: 1rem;
     font-weight: 300;
 }
+
+
+@media only screen and (max-width: 600px) {
+    .footer {
+        height: 100px;
+    }
+    .menu {
+        flex-direction: row; /* Reset to horizontal layout on larger screens */
+        justify-content: center;
+    }
+    
+    .menu__link {
+        margin: 0 15px; /* Adjust margin for small screens */
+    }
+}
+

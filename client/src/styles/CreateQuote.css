@@ -174,3 +174,124 @@
     position: absolute;
     bottom: 50px;
 }
+
+
+
+/* Media queries for mobile devices */
+@media (max-width: 767px) {
+    .quote-container {
+        width: 365px;
+        height: 455px;
+        margin: 0 auto;
+        position: fixed;
+        top: 55%;
+        left: 50%;
+        border: #fff 2px solid;
+        box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.3);
+        transform: translate(-50%, -50%);
+    }
+    .quote {
+        width: 350px;
+        height: 440px;
+        margin: 0 auto;
+        background-color: rgba(0, 0, 0, 0.822);
+        border: black 2px solid;
+        color: #fff;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+
+    .preview-image-container {
+        width: 75px;
+        height: 75px;
+        margin: 0 3px 5px;
+    }
+    .preview-container {
+        margin: 10px 0;
+        display: flex;
+        flex-wrap: wrap; /* Allows images to wrap to the next line */
+        padding: 0 10px;
+        justify-content: flex-start; /* Start from the left edge */
+        align-items: flex-start; /* Align items at the top */
+        width: 357px;
+        height: 250px; /* Adjust this value as needed */
+        overflow-y: auto;
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* Internet Explorer and Edge */
+        caret-color: transparent;
+    }
+    .preview-image {
+        width: 75px;
+        height: 75px;
+        border: 1px solid #ccc;
+        background-color: #eee;
+        background-size: cover;
+        background-position: center;
+        caret-color: transparent;
+    }
+
+
+    .remove-preview-image {
+        position: relative;
+        bottom: 82px;
+        left: 30px;
+        background: none;
+        border: none;
+        font-weight: bold;
+        color: #fff;
+    }
+    .remove-preview-image:hover::before {
+        content: 'Remove Photo';
+        font-size: 10px;
+        white-space: nowrap;
+        position: absolute;
+        color: #fff;
+        top: 15px;
+        right: 5px;
+    }
+
+
+    .bottom-inputs {
+        margin-bottom: 13px;
+    }
+    .input-container {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 15px;
+    }
+    
+    .input-field-quote {
+        padding: 10px;
+        width: 125px;
+        background: none;
+        border-top: 2px solid #fff;
+        border-bottom: 2px solid #fff;
+        color: #fff;
+    }
+    
+    .input-label-quote {
+        position: absolute;
+        top: 50%;
+        left: 5px;
+        padding: 0 5px;
+        transform: translateY(150%);
+        pointer-events: none;
+        transition: transform 0.3s ease-in-out;
+        caret-color: transparent;
+        color: #fff;
+        background-color: black;
+    }
+    
+    .input-field-quote:hover+.input-label-quote,
+    .input-field-quote:focus+.input-label-quote, 
+    .input-field-quote.has-content+.input-label-quote {
+        transform: translateY(25%);
+        background-color: black;
+        /* Adjust the translateY value to slide the label up */
+    }
+}

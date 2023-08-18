@@ -5,3 +5,20 @@
     justify-content: flex-start;
     caret-color: transparent;
 }
+.logo {
+    width: 150px;
+}
+.header-title {
+    font-size: 25px;
+    position: absolute;
+    top: 105px;
+}
+@media (max-width: 767px) {
+    .logo {
+        width: 150px;
+        height: auto;
+    }
+    .header-title {
+        font-size: 25px;
+    }
+}

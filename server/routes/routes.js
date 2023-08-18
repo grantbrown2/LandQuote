@@ -31,6 +31,7 @@ module.exports = (app) => {
 
     app.delete('/api/quote/:id', authenticate, getIdFromCookie, QuoteController.deleteQuoteById);
     app.get('/api/quotes/all', authenticate, getIdFromCookie, QuoteController.getAllQuotes);
+    app.get('/api/quotes/:id', authenticate, getIdFromCookie, QuoteController.getQuoteById);
     
     app.post('/api/quote/submit', upload.array('quoteImages'), authenticate, getIdFromCookie, QuoteController.createQuote);
 

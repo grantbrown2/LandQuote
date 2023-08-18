@@ -29,21 +29,30 @@ module.exports.findAllUsers = (req, res) => {
         .catch(err => res.json({ message: "Something went wrong retrieving all users.", error: err }));
 }
 
-module.exports.createUser = (req, res) => { // add functionality to check for existing users
-    User.create(req.body)
-        .then(user => {
-            const userToken = jwt.sign({
-                id: user._id
-            }, secret);
-            const { password, ...userInfo } = user._doc
-            res
-                .cookie("usertoken", userToken, {
-                    httpOnly: true
+module.exports.createUser = (req, res) => {
+    User.findOne({ email: req.body.email })
+        .then(existingUser => {
+            if (existingUser) {
+                return res.status(400).json({ message: "An account with this email already exists." });
+            }
+
+            User.create(req.body)
+                .then(user => {
+                    const userToken = jwt.sign({
+                        id: user._id
+                    }, secret);
+                    const { password, ...userInfo } = user._doc;
+                    res
+                        .cookie("usertoken", userToken, {
+                            httpOnly: true
+                        })
+                        .json({ message: "Registration success!", user: userInfo });
                 })
-                .json({ message: "Login success!", user: userInfo });
+                .catch(err => res.status(400).json(err));
         })
-        .catch(err => res.status(400).json(err));
+        .catch(err => res.status(500).json({ message: "Something went wrong checking email.", error: err }));
 }
+
 
 module.exports.loginUser = async(req, res) => {
     const user = await User.findOne({ email: req.body.email });

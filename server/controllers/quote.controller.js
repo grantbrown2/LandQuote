@@ -77,6 +77,21 @@ module.exports.getAllQuotes = (req, res) => {
       .catch((err) => res.json(err));
 };
 
+module.exports.getQuoteById = (req, res) => {
+  const id = req.params.id;
+
+  Quote.findById(id)
+      .populate('user', 'email')
+      .then(quote => {
+          if (!quote) {
+              return res.status(404).json({message: "Quote not found"});
+          }
+          res.json(quote);
+      })
+      .catch(err => res.status(500).json(err));
+};
+
+
 module.exports.deleteQuoteById = (req, res) => {
     const id = req.params.id;
 

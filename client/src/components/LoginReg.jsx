@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import axios from 'axios';
@@ -9,11 +9,10 @@ const LoginReg = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [errors, setErrors] = useState([]);
-    const [loginErrors, setLoginErrors] = useState("");
     const [formToggle, setFormToggle] = useState(true);
     const navigate = useNavigate();
 
+    const [duplicateEmailError, setDuplicateEmailError] = useState('');
     const [emailError, setEmailError] = useState('');
     const [passwordError, setPasswordError] = useState('');
     const [confirmPasswordError, setConfirmPasswordError] = useState('');
@@ -30,11 +29,16 @@ const LoginReg = () => {
             })
             .catch(err => {
                 console.log(err);
-                const {errors} = err.response.data;
+                const { errors } = err.response.data;
+                if (err.response.data.message) {
+                    setDuplicateEmailError(err.response.data.message);
+                } else {
+                    setDuplicateEmailError('');
+                }
                 setEmailError(errors.email ? errors.email.message : '');
                 setPasswordError(errors.password ? errors.password.message : '');
                 setConfirmPasswordError(errors.confirmPassword ? errors.confirmPassword.message : '');
-            })
+            });
     }
 
     const loginHandler = (e) => {
@@ -108,6 +112,7 @@ const LoginReg = () => {
                         <div className="registration-form">
                             <form onSubmit={registerHandler} className='register'>
                                 {emailError && <p className='email-error'>{emailError}</p>}
+                                {duplicateEmailError && <p className='email-error'>{duplicateEmailError}</p>}
                                 <div className="input-container-login">
                                     <input type="email" className="input-field-login" id="email" name="email" onChange={e => {setEmail(e.target.value);  handleInputChange(e); }} />
                                     <label htmlFor="email" className='input-label-login'>Email:</label>
