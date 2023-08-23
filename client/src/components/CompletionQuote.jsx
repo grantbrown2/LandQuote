@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 
-const CompletionQuote = () => {
+const CompletionQuote = ({setIsSubmitted}) => {
     const navigate = useNavigate();
     const logoutUser = (e) => {
         e.preventDefault()
@@ -13,13 +13,17 @@ const CompletionQuote = () => {
             .catch(err => console.log(err))
     }
 
+    const sendBack = () => {
+        setIsSubmitted(false);
+    }
+
     return (
         <div className='submission'>
             <h1>Thank you for your submission!</h1>
             <p>We will get back to you as soon as possible.</p>
             <p>What would you like to do next?</p>
             <button onClick={logoutUser}>Logout</button>
-            <button>Create another quote</button>
+            <button onClick={sendBack}>Create another quote</button>
         </div>
     )
 }

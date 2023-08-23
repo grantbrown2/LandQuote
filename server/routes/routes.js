@@ -29,11 +29,10 @@ module.exports = (app) => {
     app.patch('/api/users/update', authenticate, getIdFromCookie, UserController.updateUser);
     app.delete('/api/users/delete', authenticate, getIdFromCookie, UserController.deleteUser);
 
-    app.delete('/api/quote/:id', authenticate, getIdFromCookie, QuoteController.deleteQuoteById);
     app.get('/api/quotes/all', authenticate, getIdFromCookie, QuoteController.getAllQuotes);
     app.get('/api/quotes/:id', authenticate, getIdFromCookie, QuoteController.getQuoteById);
-    
     app.post('/api/quote/submit', upload.array('quoteImages'), authenticate, getIdFromCookie, QuoteController.createQuote);
+    app.delete('/api/quote/:id', authenticate, getIdFromCookie, QuoteController.deleteQuoteById);
 
     app.post('/api/send/email', ContactController.sendEmail);
 }

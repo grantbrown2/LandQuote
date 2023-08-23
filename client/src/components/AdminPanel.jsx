@@ -3,9 +3,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../styles/AdminPanel.css';
+import ShowQuote from './ShowQuote';
 
 const AdminPanel = () => {
     const [quotes, setQuotes] = useState([]);
+
+    const [selectedQuote, setSelectedQuote] = useState('');
+    const [toggleShowQuote, setToggleShowQuote] = useState(false);
 
     useEffect(() => {
         fetchQuotes();
@@ -33,43 +37,43 @@ const AdminPanel = () => {
         }
     };
 
-    const openImageInNewTab = (imageURL) => {
-        window.open(imageURL, '_blank'); // Opens the URL in a new tab
-    };
+    const runTest = (quoteId) => {
+        setSelectedQuote(quoteId);
+        setToggleShowQuote(true);
+    }
 
     return (
-        <div className="admin-panel">
-            <h2>All Quotes</h2>
-            {quotes.length === 0 ? (
-                <p>No quotes found.</p>
-            ) : (
-                <ul className="quote-list">
-                    {quotes.map((quote) => (
-                        <li key={quote._id} className="quote-item">
-                            <div className="quote-info">
-                                <p>Name: {quote.name}</p>
-                                <p>Email: {quote.user.email}</p>
-                                <p>Address: {quote.address}</p>
-                                <p>Number: {quote.number}</p>
-                            </div>
-
-                            {quote.quoteImages.length > 0 && (
-                                <div className="quote-images">
-                                        {quote.quoteImages.map((image, index) => {
-                                            const imageURL = `http://localhost:8000/${image.replace(/\\/g, '/')}`; // Replace backslashes with forward slashes
-                                            return <img key={index} src={imageURL} alt={`Quote Image ${index + 1}`} onClick={() => openImageInNewTab(imageURL)} />;
-                                        })}
+        <div className="admin-container">
+            {!toggleShowQuote && (
+            <div className="admin-panel">
+                <h2>All Quotes</h2>
+                {quotes.length === 0 ? (
+                    <p>No quotes found.</p>
+                ) : (
+                    <ul className="quote-list">
+                        {quotes.map((quote) => (
+                            <li key={quote._id} className="quote-item" onClick={() => runTest(quote._id)}>
+                                <div className="quote-info">
+                                    <p>New Quote From {quote.name}</p>
                                 </div>
-                            )}
-                            
-                            <button className="delete-button" onClick={() => handleDelete(quote._id)}>
-                                Delete
-                            </button>
-                        </li>
-                    ))}
-                </ul>
+                                <button className="delete-button" onClick={() => handleDelete(quote._id)}>
+                                    Delete
+                                </button>
+                            </li>
+                        ))}
+                    </ul>
+                )}
+            </div>
             )}
+            <div>
+                {toggleShowQuote && selectedQuote && (
+                    <div>
+                        <ShowQuote selectedQuote={selectedQuote} setToggleShowQuote={setToggleShowQuote}/>
+                    </div>
+                )}
+            </div>
         </div>
+        
     );
 };
 
