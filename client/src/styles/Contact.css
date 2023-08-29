@@ -13,13 +13,16 @@
     width: 500px;
     height: 640px;
     margin: 0 auto;
-    background-color: rgba(0, 0, 0, 0.822);
+    background-color: black;
     border: black 2px solid;
     color: #fff;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+.flex {
+    display: flex;
 }
 .contact-details-container {
     display: flex;
@@ -59,4 +62,105 @@ hr {
         left: 50%;
         transform: translate(-50%, -50%);
     }
+}
+
+
+
+
+
+
+.section {
+    display: flex;
+    justify-content: center;
+}
+.bb_button__text {
+    line-height: 3em;
+    text-transform: uppercase;
+    color: #fff;
+    padding: 0 1em;
+    z-index: 2;
+    opacity: .5;
+    transition: opacity .2s ease;
+}
+
+.bb_button {
+    border: 2px solid #fff;
+    text-decoration: none;
+    position: relative;
+    z-index: 1;
+}
+.bb_button:before, .bb_button:after {
+    content: '';
+    background: black;
+    position: absolute;
+    z-index: -1;
+    transition: transform .2s ease-in-out;
+}
+.bb_button--corner:before {
+    top: -3px;
+    right: 1em;
+    bottom: -3px;
+    left: 1em;
+}
+.bb_button--corner:after {
+    top: 1em;
+    right: -3px;
+    bottom: 1em;
+    left: -3px;
+}
+.bb_button--corner:hover:before {
+    transform: scaleX(0);
+}
+.bb_button--corner:hover:after {
+    transform: scaleY(0);
+}
+
+
+
+
+
+.input-field-contact {
+    padding: 10px;
+    min-width: 50px;
+    background: none;
+    border-top: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    color: #fff;
+}
+
+.input-label-contact {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    padding: 0 5px;
+    transform: translateY(150%);
+    pointer-events: none;
+    transition: transform 0.3s ease-in-out;
+    caret-color: transparent;
+    color: #fff;
+    background-color: black;
+}
+
+.input-field-contact:hover+.input-label-contact,
+.input-field-contact:focus+.input-label-contact, 
+.input-field-contact.has-content+.input-label-contact {
+    transform: translateY(25%);
+    background-color: black;
+    /* Adjust the translateY value to slide the label up */
+}
+
+.input-field-contact:focus+.input-label-contact,
+.input-field-contact:not(:placeholder-shown)+.input-label-contact,
+.input-field-contact:valid+.input-label-contact,
+.input-field-contact.has-content+.input-label-contact {
+    top: -12px;
+    /* Adjust the top position when the input is focused or has content */
+    font-size: 12px;
+    /* Optional: Reduce font size when the label moves up */
+}
+.message-input {
+    width: 100%;
+    height: 150px;
+    margin-right: 38px;
+    margin-bottom: 25px;
 }

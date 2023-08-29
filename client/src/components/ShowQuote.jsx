@@ -29,14 +29,12 @@ const ShowQuote = ({ selectedQuote, setToggleShowQuote}) => {
 
     return (
         <div className='show-quote-container'>
-            {quoteData && ( // Add a conditional check before accessing quoteData properties
+            {quoteData && ( 
                 <div className="show-quote">
                 <button className='back-button' onClick={goBack}>Back</button>
                     <div className="quote-info">
                         <p>Name: {quoteData.name}</p>
-                        {quoteData.user && quoteData.user.email && ( // Add a conditional check for user and email
-                            <p>Email: {quoteData.user.email}</p>
-                        )}
+                        <p>Email: {quoteData.user.email}</p>
                         <p>Address: {quoteData.address}</p>
                         <p>Number: {quoteData.number}</p>
                     </div>

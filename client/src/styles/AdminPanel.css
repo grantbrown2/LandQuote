@@ -1,14 +1,25 @@
+.admin-container {
+    width: 515px;
+    height: 655px;
+    margin: 0 auto;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    border: #fff 2px solid;
+    box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.3);
+    transform: translate(-50%, -50%);
+}
 .admin-panel {
-    max-width: 800px;
-    margin: 25px auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    overflow-y: auto;
+    width: 500px;
+    height: 640px;
+    margin: 0 auto;
+    background-color: black;
+    border: black 2px solid;
+    color: #fff;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 image {
     caret-color: transparent;
@@ -30,6 +41,11 @@ h2 {
     padding: 10px;
     position: relative;
     cursor: pointer;
+    margin: 15px;
+}
+.quote-item:hover {
+    border-color: #fff;
+    box-shadow: 0 0 5px 2px rgba(255, 255, 255, 0.5);
 }
 .delete-button {
     position: absolute;

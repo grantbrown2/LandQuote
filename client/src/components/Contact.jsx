@@ -26,7 +26,14 @@ const Contact = () => {
             .catch((err) => { console.error(`Error ${err}`) });
     }
 
-
+    const handleInputChange = (e) => {
+        const input = e.target;
+        if (input.value.trim() !== "") {
+            input.classList.add("has-content");
+        } else {
+            input.classList.remove("has-content");
+        }
+    };
 
     return (
         <div className="contact-container">
@@ -38,34 +45,37 @@ const Contact = () => {
                     <p className='contact-details'>numba</p>
                 </div>
                 <hr />
-                {/* <p>
-                    Hi there! If you have any questions, suggestions, or just want to say hello, feel free to get in touch with me. I'm always excited to connect with like-minded individuals, fellow developers, or potential collaborators.
+                <p>
+                    Hi there! If you have any questions, suggestions, or just want to say hello, feel free to get in touch with me.
                 </p>
                 <p>
                     You can reach me through the contact form below or by sending me an email directly at <strong>your.email@example.com</strong>. I'll do my best to get back to you as soon as possible.
-                </p> */}
-                <form onSubmit={handleSubmission}>
-                    <div>
-                        <label htmlFor='name'>Name:</label>
-                        <input type='text' id='name' name='name' value={formData.name} onChange={handleChange} required />
-                    </div>
-                    <div>
-                        <label htmlFor='phoneNum'>Phone Number:</label>
-                        <input type='tel' id='phoneNum' name='phoneNum' value={formData.phoneNum} onChange={handleChange} required />
-                    </div>
-                    <div>
-                        <label htmlFor='email'>Email:</label>
-                        <input type='email' id='email' name='email' value={formData.email} onChange={handleChange} required />
-                    </div>
-                    <div>
-                        <label htmlFor='message'>Message:</label>
-                        <textarea id='message' name='message' rows='5' value={formData.message} onChange={handleChange} required></textarea>
-                    </div>
-                    <button type='submit'>Send Message</button>
-                </form>
-                <p>
-                    Looking forward to hearing from you!
                 </p>
+                
+                
+
+                <form onSubmit={handleSubmission}>
+                    <div className="flex">
+                        <div className="input-container">
+                            <input type='text' className="input-field-contact" id='name' name='name' value={formData.name} onChange={e => {handleChange(e); handleInputChange(e); }} required />
+                            <label htmlFor='name' className='input-label-contact'>Name:</label>
+                        </div>
+                        <div className="input-container">
+                            <input type='tel' className="input-field-contact" id='phoneNum' name='phoneNum' value={formData.phoneNum} onChange={e => {handleChange(e); handleInputChange(e); }} required />
+                            <label htmlFor='phoneNum' className='input-label-contact'>Phone Number:</label>
+                        </div>
+                    </div>
+                    <div className="input-container">
+                        <textarea id='message' className="input-field-contact message-input" name='message' value={formData.message} onChange={e => {handleChange(e); handleInputChange(e); }} required />
+                        <label htmlFor='message' className='input-label-contact message-label'>Message:</label>
+                    </div>
+                    <section className="section">
+                        <label className="bb_button bb_button--corner" htmlFor="submitButton">
+                            <span className="bb_button__text">Submit</span>
+                        </label>
+                        <button id="submitButton" type="submit" style={{ display: 'none' }} />
+                    </section>
+                </form>
             </div>
         </div>
 

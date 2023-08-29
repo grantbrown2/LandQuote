@@ -196,6 +196,9 @@ input {
     cursor: pointer;
 }
 
+.submit-button:hover {
+    box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.5);
+}
 
 .slider-box {
     width: 220px;
