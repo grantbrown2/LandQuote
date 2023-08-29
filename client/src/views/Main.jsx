@@ -75,9 +75,13 @@ const Main = () => {
         <div className='main'>
             <Header/>
             {isAdmin ? (
-                toggleAdminComponent ? (<AdminPanel/>) : null
+                toggleAdminComponent ? (
+                    <AdminPanel
+                        quoteList={quoteList}
+                        setQuoteList={setQuoteList}
+                    />) : null
             ) : (
-                toggleQuoteComponent && <CreateQuote />
+                toggleQuoteComponent && <CreateQuote quoteList={quoteList} setQuoteList={setQuoteList}/>
             )}
             {toggleAboutComponent ? <About /> : null}
             {toggleContactComponent ? <Contact /> : null}
@@ -86,8 +90,6 @@ const Main = () => {
                 toggleAbout={toggleAbout}
                 toggleContact={toggleContact}
                 toggleAdminPanel={toggleAdminPanel}
-                quoteList={quoteList}
-                setQuoteList={setQuoteList}
             />
         </div>
     )

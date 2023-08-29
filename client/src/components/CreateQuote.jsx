@@ -42,13 +42,11 @@ const CreateQuote = ({quoteList, setQuoteList}) => {
                 formData.append("quoteImages", files[i]);
             }
         }
-
-
         axios.post("http://localhost:8000/api/quote/submit", formData, { withCredentials: true })
             .then(res => {
                 console.log(res);
                 setIsSubmitted(true);
-                // setQuoteList([...quoteList, res.data]);
+                setQuoteList(prevQuoteList => [...prevQuoteList, res.data]);
             })
             .catch(err => {
                 console.log(err);

@@ -10,25 +10,25 @@ const User = require('../models/user.model');
 
 async function renameFilesWithExtension(filePaths, newExtension) {
     const renamedFilePaths = [];
-  
-    for (const filePath of filePaths) {
-      const fileDir = path.dirname(filePath);
-      const oldFileName = path.basename(filePath);
-      const newFileName = `${path.parse(oldFileName).name}${newExtension}`;
-      const newPath = path.join(fileDir, newFileName);
-      
-      try {
-        await fs.rename(filePath, newPath);
-        renamedFilePaths.push(newPath);
-      } catch (err) {
-        console.error(`Error renaming file: ${filePath}`, err);
-      }
-    }
-  
-    return renamedFilePaths;
-  }
 
-  module.exports.createQuote = async (req, res) => {
+    for (const filePath of filePaths) {
+        const fileDir = path.dirname(filePath);
+        const oldFileName = path.basename(filePath);
+        const newFileName = `${path.parse(oldFileName).name}${newExtension}`;
+        const newPath = path.join(fileDir, newFileName);
+
+        try {
+            await fs.rename(filePath, newPath);
+            renamedFilePaths.push(newPath);
+        } catch (err) {
+            console.error(`Error renaming file: ${filePath}`, err);
+        }
+    }
+
+    return renamedFilePaths;
+}
+
+module.exports.createQuote = async (req, res) => {
     console.log("Request body:", req.body);
     console.log("Request files:", req.files);
 
@@ -58,39 +58,50 @@ async function renameFilesWithExtension(filePaths, newExtension) {
         notes,
         quoteImages: renamedQuoteImages, // Use the renamed image paths with '.jpg' extension
     })
-    .then(quote => {
-        console.log("Created quote:", quote);
-        res.json(quote);
-    })
-    .catch(err => {
-        console.log("Error while creating quote:", err);
-        res.status(400).json(err);
-    });
+        .then(quote => {
+            console.log("Created quote:", quote);
+            res.json(quote);
+        })
+        .catch(err => {
+            console.log("Error while creating quote:", err);
+            res.status(400).json(err);
+        });
 };
 
 
 
 module.exports.getAllQuotes = (req, res) => {
     Quote.find({})
-      .populate('user', 'email')
-      .then((quotes) => res.json(quotes))
-      .catch((err) => res.json(err));
+        .populate('user', 'email')
+        .then((quotes) => res.json(quotes))
+        .catch((err) => res.json(err));
 };
 
 module.exports.getQuoteById = (req, res) => {
-  const id = req.params.id;
+    const id = req.params.id;
 
-  Quote.findById(id)
-      .populate('user', 'email')
-      .then(quote => {
-          if (!quote) {
-              return res.status(404).json({message: "Quote not found"});
-          }
-          res.json(quote);
-      })
-      .catch(err => res.status(500).json(err));
+    Quote.findById(id)
+        .populate('user', 'email')
+        .then(quote => {
+            if (!quote) {
+                return res.status(404).json({ message: "Quote not found" });
+            }
+            res.json(quote);
+        })
+        .catch(err => res.status(500).json(err));
 };
 
+module.exports.markRead = (req, res) => {
+    const id = req.params.id;
+    Quote.findByIdAndUpdate(id, {markedRead: true}, {new: true})
+        .then(updatedQuote => {
+            if (!updatedQuote) {
+                return res.status(404).json({ message: "Quote not found" });
+            }
+            res.json(updatedQuote);
+        })
+        .catch(err => res.status(500).json(err));
+};
 
 module.exports.deleteQuoteById = (req, res) => {
     const id = req.params.id;
@@ -98,9 +109,9 @@ module.exports.deleteQuoteById = (req, res) => {
     Quote.findByIdAndRemove(id)
         .then(quote => {
             if (!quote) {
-                return res.status(404).json({message: "Quote not found"});
+                return res.status(404).json({ message: "Quote not found" });
             }
-            return res.status(200).json({message: "Quote successfully deleted"});
+            return res.status(200).json({ message: "Quote successfully deleted" });
         })
         .catch(err => res.status(500).json(err));
 };

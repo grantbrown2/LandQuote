@@ -22,6 +22,10 @@ const quoteSchema = new mongoose.Schema({
         type: String,
         default: ""
     },
+    markedRead: {
+        type : Boolean ,
+        default : false
+    },
     quoteImages: {
         type: [String], // This will hold the paths of all uploaded files
         required: [true, "You must choose at least 1 image!"]

@@ -49,8 +49,8 @@ h2 {
 }
 .delete-button {
     position: absolute;
-    top: 2px;
-    right: 2px;
+    top: 5px;
+    right: 5px;
     background-color: #ff5858;
     color: #fff;
     border: none;
