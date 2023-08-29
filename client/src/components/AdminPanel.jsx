@@ -91,7 +91,7 @@ const AdminPanel = ({quoteList, setQuoteList}) => {
             <div>
                 {toggleShowQuote && selectedQuote && (
                     <div>
-                        <ShowQuote selectedQuote={selectedQuote} setToggleShowQuote={setToggleShowQuote}/>
+                        <ShowQuote selectedQuote={selectedQuote} setToggleShowQuote={setToggleShowQuote} setUnreadCount={setUnreadCount}/>
                     </div>
                 )}
             </div>

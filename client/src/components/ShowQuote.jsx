@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import '../styles/ShowQuote.css'
 
-const ShowQuote = ({ selectedQuote, setToggleShowQuote}) => {
+const ShowQuote = ({ selectedQuote, setToggleShowQuote, setUnreadCount}) => {
 
     const [quoteData, setQuoteData] = useState(null); // Initialize with null
 
@@ -27,11 +27,24 @@ const ShowQuote = ({ selectedQuote, setToggleShowQuote}) => {
         setToggleShowQuote(false);
     }
 
+    const markUnread = (quoteId) => {
+        axios.patch(`http://localhost:8000/api/quote/mark-unread/${quoteId}`, null, {
+            withCredentials: true,
+        })
+        .then(() => {
+            setUnreadCount(prevCount => prevCount + 1);
+        })
+        .catch(error => {
+            console.error('Error marking quote as unread:', error);
+        });
+    };
+
     return (
         <div className='show-quote-container'>
             {quoteData && ( 
                 <div className="show-quote">
                 <button className='back-button' onClick={goBack}>Back</button>
+                <button className='unread-button' onClick={() => markUnread(quoteData._id)}>Mark Unread</button>
                     <div className="quote-info">
                         <p>Name: {quoteData.name}</p>
                         <p>Email: {quoteData.user.email}</p>

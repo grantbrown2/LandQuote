@@ -103,6 +103,18 @@ module.exports.markRead = (req, res) => {
         .catch(err => res.status(500).json(err));
 };
 
+module.exports.markUnread = (req, res) => {
+    const id = req.params.id;
+    Quote.findByIdAndUpdate(id, {markedRead: false}, {new: true})
+        .then(updatedQuote => {
+            if (!updatedQuote) {
+                return res.status(404).json({ message: "Quote not found" });
+            }
+            res.json(updatedQuote);
+        })
+        .catch(err => res.status(500).json(err));
+};
+
 module.exports.deleteQuoteById = (req, res) => {
     const id = req.params.id;
 

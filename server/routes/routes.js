@@ -33,6 +33,7 @@ module.exports = (app) => {
     app.get('/api/quotes/:id', authenticate, getIdFromCookie, QuoteController.getQuoteById);
     app.post('/api/quote/submit', upload.array('quoteImages'), authenticate, getIdFromCookie, QuoteController.createQuote);
     app.patch('/api/quote/mark-read/:id', authenticate, getIdFromCookie, QuoteController.markRead);
+    app.patch('/api/quote/mark-unread/:id', authenticate, getIdFromCookie, QuoteController.markUnread);
     app.delete('/api/quote/:id', authenticate, getIdFromCookie, QuoteController.deleteQuoteById);
 
     app.post('/api/send/email', ContactController.sendEmail);
