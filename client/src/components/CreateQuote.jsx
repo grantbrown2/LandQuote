@@ -4,7 +4,7 @@ import '../styles/CreateQuote.css'
 import CompletionQuote from './CompletionQuote';
 
 
-const CreateQuote = ({quoteList, setQuoteList}) => {
+const CreateQuote = ({ quoteList, setQuoteList }) => {
 
     const [address, setAddress] = useState('');
     const [name, setName] = useState('');
@@ -14,7 +14,7 @@ const CreateQuote = ({quoteList, setQuoteList}) => {
     const [files, setFiles] = useState([]);
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [imagePreviews, setImagePreviews] = useState([]);
-    
+
     const [addressError, setAddressError] = useState('');
     const [nameError, setNameError] = useState('');
     const [numberError, setNumberError] = useState('');
@@ -97,14 +97,14 @@ const CreateQuote = ({quoteList, setQuoteList}) => {
                         </div>
 
                         <div className='preview-container'>
-                        {imagePreviews.map((previewUrl, index) => (
-                            <div key={index} className="preview-image-container">
-                                <img src={previewUrl} alt={`Preview ${index}`} className='preview-image' />
-                                <button type='button' onClick={() => handleRemoveImage(index)} className='remove-preview-image'>
-                                    X
-                                </button>
-                            </div>
-                        ))}
+                            {imagePreviews.map((previewUrl, index) => (
+                                <div key={index} className="preview-image-container">
+                                    <img src={previewUrl} alt={`Preview ${index}`} className='preview-image' />
+                                    <button type='button' onClick={() => handleRemoveImage(index)} className='remove-preview-image'>
+                                        X
+                                    </button>
+                                </div>
+                            ))}
                         </div>
                         <div className="bottom-inputs">
                             <div className="input-container">
@@ -126,8 +126,13 @@ const CreateQuote = ({quoteList, setQuoteList}) => {
                                 <input type="text" className="input-field-quote" id="notes" name="notes" onChange={e => { setNotes(e.target.value); handleInputChange(e); }} />
                                 <label htmlFor="notes" className='input-label-quote'>Notes:</label>
                             </div>
-                        <button type="submit" className="submit-button">Submit</button>
                         </div>
+                        <section className="section">
+                            <label className="bb_button bb_button--corner" htmlFor="submitButton">
+                                <span className="bb_button__text">Submit</span>
+                            </label>
+                            <button id="submitButton" type="submit" style={{ display: 'none' }} />
+                        </section>
                     </form>
                 ) :
                     <CompletionQuote
@@ -141,7 +146,7 @@ const CreateQuote = ({quoteList, setQuoteList}) => {
                 }
             </div>
         </div>
-        
+
     )
 }
 

@@ -115,6 +115,7 @@ hr {
 .section {
     display: flex;
     justify-content: center;
+    margin: 0 0 35px 0;
 }
 .bb_button__text {
     line-height: 3em;
