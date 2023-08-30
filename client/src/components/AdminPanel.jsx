@@ -4,6 +4,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../styles/AdminPanel.css';
 import ShowQuote from './ShowQuote';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBell } from '@fortawesome/free-solid-svg-icons';
 
 const AdminPanel = ({quoteList, setQuoteList}) => {
 
@@ -39,14 +41,15 @@ const AdminPanel = ({quoteList, setQuoteList}) => {
             await axios.delete(`http://localhost:8000/api/quote/${quoteId}`, {
                 withCredentials: true, // Send cookies with the request
             });
+            // After successful deletion, fetch quotes again to refresh the list
+            await fetchQuotes();
             setSelectedQuote('');
             setToggleShowQuote(false);
-            // After successful deletion, fetch quotes again to refresh the list
-            fetchQuotes();
         } catch (error) {
             console.error('Error deleting quote:', error);
         }
     };
+
 
     const selectQuote = async (quoteId) => {
         try {
@@ -66,9 +69,16 @@ const AdminPanel = ({quoteList, setQuoteList}) => {
         <div className="admin-container">
             {!toggleShowQuote && (
             <div className="admin-panel">
-                <h2>All Quotes</h2>
-                <div className="unread-counter">
-                    <p>You have {unreadCount} unread quotes</p>
+                <div className="header5">
+                    <h2>All Quotes</h2>
+                    <div className="read-counter">
+                        <div className="unread-counter">
+                            <FontAwesomeIcon icon={faBell} size="2xl" style={{color: "#ffffff",}} />
+                            <div className="circle">
+                                <span className='counter'>{unreadCount}</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 {quoteList.length === 0 ? (
                     <p>No quotes found.</p>
@@ -76,7 +86,7 @@ const AdminPanel = ({quoteList, setQuoteList}) => {
                     <ul className="quote-list">
                         {quoteList.map((quote) => (
                             <li key={quote._id} className="quote-item" onClick={() => selectQuote(quote._id)}>
-                                <div className="quote-info">
+                                <div className={`quote-info ${quote.markedRead ? 'read-quote' : ''}`}>
                                     <p>New Quote From {quote.name}</p>
                                 </div>
                                 <button className="delete-button" onClick={() => handleDelete(quote._id)}>
@@ -91,7 +101,7 @@ const AdminPanel = ({quoteList, setQuoteList}) => {
             <div>
                 {toggleShowQuote && selectedQuote && (
                     <div>
-                        <ShowQuote selectedQuote={selectedQuote} setToggleShowQuote={setToggleShowQuote} setUnreadCount={setUnreadCount}/>
+                        <ShowQuote selectedQuote={selectedQuote} setToggleShowQuote={setToggleShowQuote} setUnreadCount={setUnreadCount} setSelectedQuote={setSelectedQuote} setQuoteList={setQuoteList}/>
                     </div>
                 )}
             </div>
