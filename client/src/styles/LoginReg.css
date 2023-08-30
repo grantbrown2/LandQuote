@@ -238,3 +238,59 @@ input {
 #slider:checked ~ .slider {
     transform: translateX(0);
 }
+
+
+
+
+
+
+
+
+
+.section {
+    display: flex;
+    justify-content: center;
+}
+.bb_button__text_login {
+    line-height: 2em;
+    text-transform: uppercase;
+    color: #fff;
+    padding: 0 1em;
+    z-index: 2;
+}
+.bb_button_login {
+    border: 2px solid #fff;
+    text-decoration: none;
+    position: relative;
+    z-index: 1;
+}
+.bb_button_login:hover {
+    box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.5);
+}
+.bb_button_login:before, .bb_button_login:after {
+    content: '';
+    background: black;
+    position: absolute;
+    z-index: -1;
+    transition: transform .2s ease-in-out;
+}
+.bb_button--corner_login:before {
+    top: -3px;
+    right: 1em;
+    bottom: -3px;
+    left: 1em;
+}
+.bb_button--corner_login:after {
+    top: 0.5em;
+    right: -3px;
+    bottom: 0.5em;
+    left: -3px;
+}
+.bb_button--corner_login:hover:before {
+    transform: scaleX(0);
+}
+.bb_button--corner_login:hover:after {
+    transform: scaleY(0);
+}
+
+

@@ -6,8 +6,11 @@ import '../styles/AdminPanel.css';
 import ShowQuote from './ShowQuote';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelopeOpen } from '@fortawesome/free-solid-svg-icons';
 
-const AdminPanel = ({quoteList, setQuoteList}) => {
+
+const AdminPanel = ({ quoteList, setQuoteList }) => {
 
     const [selectedQuote, setSelectedQuote] = useState('');
     const [toggleShowQuote, setToggleShowQuote] = useState(false);
@@ -63,50 +66,56 @@ const AdminPanel = ({quoteList, setQuoteList}) => {
             console.error('Error marking quote as read:', error);
         }
     };
-    
+
 
     return (
         <div className="admin-container">
             {!toggleShowQuote && (
-            <div className="admin-panel">
-                <div className="header5">
-                    <h2>All Quotes</h2>
-                    <div className="read-counter">
-                        <div className="unread-counter">
-                            <FontAwesomeIcon icon={faBell} size="2xl" style={{color: "#ffffff",}} />
-                            <div className="circle">
-                                <span className='counter'>{unreadCount}</span>
+                <div className="admin-panel">
+                    <div className="header5">
+                        <h2>All Quotes</h2>
+                        <div className="read-counter">
+                            <div className="unread-counter">
+                                <FontAwesomeIcon icon={faBell} size="2xl" style={{ color: "#ffffff", }} />
+                                <div className="circle">
+                                    <span className='counter'>{unreadCount}</span>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <hr />
+                    {quoteList.length === 0 ? (
+                        <p>No quotes found.</p>
+                    ) : (
+                        <ul className="quote-list">
+                            {quoteList.map((quote) => (
+                                <li key={quote._id} className="quote-item" onClick={() => selectQuote(quote._id)}>
+                                    <div className={`quote-info ${quote.markedRead ? 'read-quote' : ''}`}>
+                                        <p>New Quote From {quote.name}</p>
+                                    </div>
+                                    <button className="delete-button" onClick={() => handleDelete(quote._id)}>
+                                        Delete
+                                    </button>
+                                    {quote.markedRead ? (
+                                        <FontAwesomeIcon className='read-letter' icon={faEnvelopeOpen} size="lg" style={{color: "#ffffff",}} />
+                                    ) : (
+                                        <FontAwesomeIcon className='read-letter' icon={faEnvelope} size="lg" style={{color: "#ffffff",}} />
+                                    )}
+                                </li>
+                            ))}
+                        </ul>
+                    )}
                 </div>
-                {quoteList.length === 0 ? (
-                    <p>No quotes found.</p>
-                ) : (
-                    <ul className="quote-list">
-                        {quoteList.map((quote) => (
-                            <li key={quote._id} className="quote-item" onClick={() => selectQuote(quote._id)}>
-                                <div className={`quote-info ${quote.markedRead ? 'read-quote' : ''}`}>
-                                    <p>New Quote From {quote.name}</p>
-                                </div>
-                                <button className="delete-button" onClick={() => handleDelete(quote._id)}>
-                                    Delete
-                                </button>
-                            </li>
-                        ))}
-                    </ul>
-                )}
-            </div>
             )}
             <div>
                 {toggleShowQuote && selectedQuote && (
                     <div>
-                        <ShowQuote selectedQuote={selectedQuote} setToggleShowQuote={setToggleShowQuote} setUnreadCount={setUnreadCount} setSelectedQuote={setSelectedQuote} setQuoteList={setQuoteList}/>
+                        <ShowQuote selectedQuote={selectedQuote} setToggleShowQuote={setToggleShowQuote} setUnreadCount={setUnreadCount} setSelectedQuote={setSelectedQuote} setQuoteList={setQuoteList} />
                     </div>
                 )}
             </div>
         </div>
-        
+
     );
 };
 

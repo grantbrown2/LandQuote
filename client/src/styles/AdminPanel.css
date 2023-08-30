@@ -112,3 +112,17 @@ h2 {
 .read-quote {
     color: grey;
 }
+.read-letter {
+    position: relative;
+    bottom: 60px;
+    right: 215px;
+}
+/* .read-letter:hover::before {
+    content: 'Mark Read';
+    font-size: 10px;
+    white-space: nowrap;
+    position: relative;
+    color: #fff;
+    top: 20px;
+    right: 20px;
+} */

@@ -45,10 +45,10 @@ const Contact = () => {
                     <p className='contact-details'>numba</p>
                 </div>
                 <hr />
-                <p>
+                <p className='contact-message'>
                     Hi there! If you have any questions, suggestions, or just want to say hello, feel free to get in touch with me.
                 </p>
-                <p>
+                <p className='contact-message'>
                     You can reach me through the contact form below or by sending me an email directly at <strong>your.email@example.com</strong>. I'll do my best to get back to you as soon as possible.
                 </p>
                 

@@ -54,13 +54,56 @@ hr {
         width: 350px;
         height: 440px;
         margin: 0 auto;
-        background-color: rgba(0, 0, 0, 0.822);
+        background-color: black;
         border: black 2px solid;
         color: #fff;
         position: fixed;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+    }
+    .contact-message {
+        font-size: 10px;
+    }
+    .bottom-inputs {
+        margin-bottom: 13px;
+    }
+    .input-container {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 15px;
+    }
+    
+    .input-field-contact {
+        padding: 10px;
+        width: 125px;
+        background: none;
+        border-top: 2px solid #fff;
+        border-bottom: 2px solid #fff;
+        color: #fff;
+    }
+    
+    .input-label-contact {
+        position: absolute;
+        top: 50%;
+        left: 5px;
+        padding: 0 5px;
+        transform: translateY(150%);
+        pointer-events: none;
+        transition: transform 0.3s ease-in-out;
+        caret-color: transparent;
+        color: #fff;
+        background-color: black;
+    }
+    
+    .input-field-contact:hover+.input-label-contact,
+    .input-field-contact:focus+.input-label-contact, 
+    .input-field-contact.has-content+.input-label-contact {
+        transform: translateY(25%);
+        background-color: black;
+        /* Adjust the translateY value to slide the label up */
     }
 }
 
@@ -79,15 +122,15 @@ hr {
     color: #fff;
     padding: 0 1em;
     z-index: 2;
-    opacity: .5;
-    transition: opacity .2s ease;
 }
-
 .bb_button {
     border: 2px solid #fff;
     text-decoration: none;
     position: relative;
     z-index: 1;
+}
+.bb_button:hover {
+    box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.5);
 }
 .bb_button:before, .bb_button:after {
     content: '';

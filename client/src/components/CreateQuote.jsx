@@ -130,7 +130,14 @@ const CreateQuote = ({quoteList, setQuoteList}) => {
                         </div>
                     </form>
                 ) :
-                    <CompletionQuote setIsSubmitted={setIsSubmitted}/>
+                    <CompletionQuote
+                        setIsSubmitted={setIsSubmitted}
+                        files={files}
+                        setFiles={setFiles}
+                        imagePreviews={imagePreviews}
+                        setImagePreviews={setImagePreviews}
+                        index={imagePreviews.length}
+                    />
                 }
             </div>
         </div>

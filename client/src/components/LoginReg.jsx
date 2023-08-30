@@ -103,7 +103,12 @@ const LoginReg = () => {
                                     <input type="password" className="input-field-login" id="password" name="password" onChange={e => {setPassword(e.target.value); handleInputChange(e); }} />
                                     <label htmlFor="password" className='input-label-login'>Password:</label>
                                 </div>
-                                <button type="submit" className="submit-button">Login</button>
+                                <section className="section">
+                                    <label className="bb_button_login bb_button--corner_login" htmlFor="submitButton">
+                                        <span className="bb_button__text_login">Submit</span>
+                                    </label>
+                                    <button id="submitButton" type="submit" style={{ display: 'none' }} />
+                                </section>
                             </form>
                         </div>
                     </>
@@ -127,7 +132,12 @@ const LoginReg = () => {
                                     <input type="password" className="input-field-login" id="confirmPassword" name="confirmPassword" onChange={e => {setConfirmPassword(e.target.value);  handleInputChange(e); }} />
                                     <label htmlFor="confirmPassword" className='input-label-login'>Confirm Password:</label>
                                 </div>
-                                <button type="submit" className="submit-button">Register</button>
+                                <section className="section">
+                                    <label className="bb_button_login bb_button--corner_login" htmlFor="submitButton">
+                                        <span className="bb_button__text_login">Register</span>
+                                    </label>
+                                    <button id="submitButton" type="submit" style={{ display: 'none' }} />
+                                </section>
                             </form>
                         </div>
                     </>
