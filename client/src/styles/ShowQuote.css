@@ -21,3 +21,22 @@
     left: 50%;
     transform: translate(-50%, -50%);
 }
+.notes {
+    overflow-x: hidden;
+    overflow-y: scroll;
+    height: 200px;
+    margin: 0 15px;
+}
+.notes-title {
+    font-size: 25px;
+}
+.quote-images {
+    overflow-x: hidden;
+    overflow-y: scroll;
+    height: 200px;
+    margin: 0 15px;
+}
+.quote-image {
+    width: 100px;
+    height: 100px;
+}

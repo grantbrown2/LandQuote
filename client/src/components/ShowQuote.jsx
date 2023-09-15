@@ -65,13 +65,14 @@ const ShowQuote = ({ selectedQuote, setToggleShowQuote, setUnreadCount, setSelec
                         <p>Email: {quoteData.user.email}</p>
                         <p>Address: {quoteData.address}</p>
                         <p>Number: {quoteData.number}</p>
-                        <p>Notes: {quoteData.notes}</p>
+                        <span className='notes-title'>Notes:</span>
+                        <p className='notes'>{quoteData.notes}</p>
                     </div>
                     {quoteData.quoteImages.length > 0 && (
                         <div className="quote-images">
                             {quoteData.quoteImages.map((image, index) => {
                                 const imageURL = `http://localhost:8000/${image.replace(/\\/g, '/')}`;
-                                return <img key={index} src={imageURL} alt={`Quote Image ${index + 1}`} onClick={() => openImageInNewTab(imageURL)} />;
+                                return <img className='quote-image' key={index} src={imageURL} alt={`Quote Image ${index + 1}`} onClick={() => openImageInNewTab(imageURL)} />;
                             })}
                         </div>
                     )}

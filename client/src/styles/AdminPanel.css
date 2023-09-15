@@ -41,9 +41,51 @@ h2 {
     list-style: none;
     padding: 0;
     width: 100%;
-    max-height: 450px;
+    max-height: 540px;
     overflow-y: auto;
 }
+
+/* Hide the default scrollbar */
+.quote-list {
+    scrollbar-width: thin;
+    scrollbar-color: #666666 #111111;
+    overflow-y: scroll;
+}
+/* Style for Webkit browsers (Chrome, Safari) */
+.quote-list::-webkit-scrollbar {
+    width: 10px;
+}
+.quote-list::-webkit-scrollbar-track {
+    background: #111111;
+}
+.quote-list::-webkit-scrollbar-thumb {
+    background-color: #666666;
+    border-radius: 10px;
+}
+/* Style for Firefox */
+.quote-list {
+    scrollbar-width: thin;
+    scrollbar-color: #666666 #111111;
+}
+.quote-list {
+    scrollbar-width: thin;
+    scrollbar-color: #666666 #111111;
+}
+/* Style for Edge and IE */
+.quote-list {
+    -ms-overflow-style: none; /* Hide the scrollbar in IE/Edge */
+    scrollbar-width: none; /* Hide the scrollbar in Firefox and newer Edge versions */
+}
+.quote-list::-webkit-scrollbar {
+    display: none; /* Hide the scrollbar in Chrome and Safari */
+}
+
+
+
+
+
+
+
 .quote-item {
     margin-bottom: 20px;
     border: 1px solid #ccc;
@@ -85,7 +127,7 @@ h2 {
 }
 .quote-images img {
     max-width: 100px;
-    height: auto;
+    height: 100px;
     /* Ensure the image maintains its aspect ratio */
     margin: 5px;
 }
